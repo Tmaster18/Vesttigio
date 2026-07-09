@@ -2031,9 +2031,18 @@ footer ul li:hover{
 }
 
 /* Responsivo */
+/* Responsivo */
 @media (max-width:1200px){
     .hero h1{
         font-size:110px;
+    }
+
+    .cta h2{
+        font-size:60px;
+    }
+
+    .contact-info h2{
+        font-size:56px;
     }
 }
 
@@ -2056,16 +2065,6 @@ footer ul li:hover{
         font-size:36px;
     }
 }
-
-    .cta h2{
-        font-size:60px;
-    }
-
-    .contact-info h2{
-        font-size:56px;
-    }
-
-
 
 /* ==========================================================
    TABLETS E TELAS MÉDIAS (992px)
@@ -2587,8 +2586,8 @@ footer ul li:hover{
         padding:60px 4%;
     }
 
-   
-
+}
+ 
 /* ==========================================================
    TELAS MUITO PEQUENAS (360px)
 ========================================================== */
@@ -2685,7 +2684,6 @@ footer ul li:hover{
 
 }
 
-}
 /* ==========================================================
    ANIMAÇÕES - COMPLETO
 ========================================================== */
