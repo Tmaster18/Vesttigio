@@ -166,15 +166,12 @@ document.querySelectorAll("a[href^='#']").forEach(link => {
 const particles = document.getElementById("particles");
 
 if (particles) {
-
     let animationId;
     let lastTime = 0;
     const interval = window.innerWidth < 768 ? 800 : 350;
 
     function createParticle() {
-
         const p = document.createElement("span");
-
         const size = Math.random() * 3 + 2;
 
         p.style.position = "absolute";
@@ -207,41 +204,26 @@ if (particles) {
         });
 
         setTimeout(() => p.remove(), duration);
-
     }
 
     function animate(time) {
-
         if (time - lastTime > interval) {
-
             createParticle();
-
             lastTime = time;
-
         }
-
         animationId = requestAnimationFrame(animate);
-
     }
 
     animationId = requestAnimationFrame(animate);
 
     document.addEventListener("visibilitychange", () => {
-
         if (document.hidden) {
-
             cancelAnimationFrame(animationId);
-
         } else {
-
             lastTime = performance.now();
-
             animationId = requestAnimationFrame(animate);
-
         }
-
     });
-
 }
 
 /* ==========================================================
