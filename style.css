@@ -1417,7 +1417,7 @@ footer ul li:hover{
 @media (max-width:992px){
 
     /* MODIFICADO: Remove a trava de 100vh em telas menores e deixa fluir por conteúdo */
-    section, .numbers-section, .instagram, .newsletter, .parallax{
+    section, .numbers-section, .instagram, .parallax{
         height:auto !important;
         overflow:visible !important;
         padding:80px 5% 40px !important;
@@ -1497,10 +1497,14 @@ footer ul li:hover{
 
     .members-grid{
         grid-template-columns:repeat(2,1fr);
+        gap: 20px;
     }
 
+    /* MODIFICADO: Mantém a regra de corpo inteiro com contenção em telas menores */
     .member img{
         height:320px !important;
+        object-fit: contain !important;
+        background: #151515;
     }
 
     .video-grid{
@@ -1616,20 +1620,34 @@ footer ul li:hover{
         padding:80px 5% !important;
     }
 
+    /* ---- HERO RESPONSIVO CORRIGIDO ---- */
     .hero h1{
-        font-size:72px;
-        letter-spacing:4px;
+        font-size:72px !important;
+        letter-spacing:4px !important;
+        line-height: 1.0 !important;
+        margin-bottom: 12px !important;
     }
 
-    .hero h2{
-        font-size:20px;
-        letter-spacing:6px;
+    .hero h2:first-of-type, 
+    .hero .hero-top-text {
+        font-size:18px !important;
+        letter-spacing:6px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .hero h2:nth-of-type(2),
+    .hero h3,
+    .hero .classic-rock-text {
+        font-size:22px !important;
+        letter-spacing:6px !important;
+        margin-top: 0px !important; /* ANULA a aproximação negativa para não encavalar */
+        line-height: 1.2 !important;
     }
 
     .hero p{
-        font-size:16px;
-        margin:25px auto;
-        max-width:100%;
+        font-size:16px !important;
+        margin:30px auto !important;
+        max-width:100% !important;
     }
 
     .hero .btn{
@@ -1685,12 +1703,15 @@ footer ul li:hover{
         margin:0 auto;
     }
 
+    /* MODIFICADO: Ajustado para manter fotos verticais inteiras no celular */
     .member img{
-        height:300px !important;
+        height:50vh !important;
+        object-fit: contain !important;
+        background: #151515;
     }
 
     .member h3{
-        font-size:28px;
+        font-size:26px;
         padding:20px 20px 5px;
     }
 
@@ -1825,15 +1846,6 @@ footer ul li:hover{
         letter-spacing:2px;
     }
 
-    .newsletter h2{
-        font-size:40px;
-    }
-
-    .newsletter input, .newsletter button{
-        width:100%;
-        max-width:400px;
-    }
-
     .footer-grid{
         grid-template-columns:1fr 1fr;
         gap:40px;
@@ -1878,6 +1890,18 @@ footer ul li:hover{
     section{
         padding:60px 4% !important;
     }
+    
+    .buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+    
+    .hero .btn {
+        width: 100%;
+        text-align: center;
+    }
 }
  
 /* ==========================================================
@@ -1885,8 +1909,9 @@ footer ul li:hover{
 ========================================================== */
 
 @media (max-width:360px){
-    .hero h1{ font-size:36px; }
-    .hero h2{ font-size:14px; letter-spacing:3px; }
+    .hero h1{ font-size:36px !important; }
+    .hero h2:first-of-type, .hero .hero-top-text { font-size:14px !important; letter-spacing:4px !important; }
+    .hero h2:nth-of-type(2), .hero h3, .hero .classic-rock-text { font-size:16px !important; letter-spacing:3px !important; margin-top: 0px !important; }
     .section-title h2{ font-size:28px; }
     .about-text h2{ font-size:28px; }
     .contact-info h2{ font-size:28px; }
@@ -1905,8 +1930,9 @@ footer ul li:hover{
         min-height:100vh;
         padding:100px 5%;
     }
-    .hero h1{ font-size:60px; }
-    .hero h2{ font-size:18px; }
+    .hero h1{ font-size:60px !important; }
+    .hero h2:first-of-type, .hero .hero-top-text { font-size:16px !important; }
+    .hero h2:nth-of-type(2), .hero h3, .hero .classic-rock-text { font-size:18px !important; margin-top: 0px !important; }
     .hero p{ font-size:15px; margin:15px auto; }
     .buttons{ gap:12px; }
     .hero .btn{ padding:10px 20px; font-size:12px; }
