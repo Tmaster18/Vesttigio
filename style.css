@@ -293,12 +293,12 @@ display: block;
 
 /* 3. "CLASSIC ROCK EXPERIENCE" (Aumentado Sutilmente) */
 .hero h2 {
-font-size:40px; /* Aumentado sutilmente */
+font-size:60px; /* Aumentado sutilmente */
 font-weight:400;
 letter-spacing:14px;
 color:#fff;
 text-transform: uppercase;
-margin-top: -15px;
+margin-top: -30px;
 }
 
 /* 4. "Dos grandes clássicos..." (Distanciado da frase superior) */
