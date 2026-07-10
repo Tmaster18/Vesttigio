@@ -683,84 +683,102 @@ text-transform:uppercase;
 }
 
 /* ==========================================================
-   SHOWS
+   SHOWS (TÍTULO COMPACTO E 5 EVENTOS À MOSTRA)
 ========================================================== */
 
-#shows{
-background:#0d0d0d;
+#shows {
+    background: #0d0d0d;
 }
 
-/* MODIFICADO: Inserida rolagem interna para caso a lista de shows cresça muito */
-.timeline{
-display:flex;
-flex-direction:column;
-gap:20px;
-width:100%;
-max-width:1100px;
-margin:auto;
-max-height:55vh;
-overflow-y:auto;
-padding-right:10px;
+/* Ajuste específico para o título interno desta seção */
+#shows .section-title {
+    margin-bottom: 20px;
 }
 
-/* Customização leve do scroll interno dos shows */
+#shows .section-title h2 {
+    font-size: 44px; /* Mais compacto */
+}
+
+#shows .section-title p {
+    font-size: 14px;
+}
+
+/* MODIFICADO: Altura calculada para exibir exatamente 5 itens na tela útil */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Espaçamento mais firme entre as linhas */
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
+    height: 54vh; /* Garante a exibição nativa de 5 blocos em 100vh */
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+/* Customização da barra de rolagem (caso haja mais de 5 eventos) */
 .timeline::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
+}
+.timeline::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
 }
 .timeline::-webkit-scrollbar-thumb {
     background: var(--blue);
     border-radius: 10px;
 }
 
-.show{
-display:grid;
-grid-template-columns:150px 1fr 180px;
-align-items:center;
-background:#151515;
-border-left:5px solid var(--blue);
-padding:22px;
-border-radius:8px;
-transition:.35s;
+/* MODIFICADO: Altura interna ligeiramente reduzida para otimizar espaço */
+.show {
+    display: grid;
+    grid-template-columns: 130px 1fr 160px;
+    align-items: center;
+    background: #151515;
+    border-left: 4px solid var(--blue);
+    padding: 16px 24px; /* Mais compacto verticalmente */
+    border-radius: 6px;
+    transition: .35s;
 }
 
-.show:hover{
-transform:translateX(10px);
-background:#1a1a1a;
+.show:hover {
+    transform: translateX(6px);
+    background: #1a1a1a;
 }
 
-.date{
-font-family:'Bebas Neue';
-font-size:40px;
-color:var(--blue);
-letter-spacing:2px;
-line-height:1;
+.date {
+    font-family: 'Bebas Neue';
+    font-size: 32px; /* Reduzido de 40px */
+    color: var(--blue);
+    letter-spacing: 1px;
+    line-height: 1;
 }
 
-.info h3{
-font-size:24px;
-margin-bottom:4px;
+.info h3 {
+    font-size: 20px; /* Reduzido de 24px */
+    margin-bottom: 2px;
+    font-weight: 600;
 }
 
-.info p{
-color:#bfbfbf;
-font-size:15px;
+.info p {
+    color: #bfbfbf;
+    font-size: 14px;
 }
 
-.ticket{
-justify-self:end;
-padding:12px 24px;
-border:2px solid var(--blue);
-border-radius:30px;
-transition:.35s;
-font-weight:700;
-letter-spacing:2px;
-font-size:14px;
+.ticket {
+    justify-self: end;
+    padding: 10px 20px; /* Botão mais elegante e menor */
+    border: 2px solid var(--blue);
+    border-radius: 30px;
+    transition: .35s;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    font-size: 12px;
 }
 
-.ticket:hover{
-background:var(--blue);
+.ticket:hover {
+    background: var(--blue);
+    color: #fff;
 }
-
 /* ==========================================================
    GALERIA
 ========================================================== */
