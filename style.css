@@ -229,7 +229,7 @@ cursor:pointer;
 }
 
 /* ==========================================================
-   HERO
+   HERO (ORGANIZADO POR HIERARQUIA DE TEXTO)
 ========================================================== */
 
 #home{
@@ -264,14 +264,18 @@ max-width:1000px;
 padding:20px;
 }
 
-.hero h2{
-font-size:30px;
-font-weight:300;
-letter-spacing:12px;
-margin-bottom:15px;
-color:#cfcfcf;
+/* 1. "THE ULTIMATE" */
+.hero .hero-top-text {
+font-size: 24px;
+font-weight: 300;
+letter-spacing: 12px;
+margin-bottom: 10px;
+color: #cfcfcf;
+text-transform: uppercase;
+display: block;
 }
 
+/* 2. "VESTTIGIO" (Nome principal iluminado) */
 .hero h1{
     font-family:'Bebas Neue';
     font-size:150px;
@@ -284,8 +288,28 @@ color:#cfcfcf;
     background-clip:text;
     text-shadow:0 0 30px rgba(255,255,255,.15);
     animation:titleGlow 4s infinite;
+    margin-bottom: 15px;
 }
 
+/* 3. "CLASSIC ROCK EXPERIENCE" (Aumentado Sutilmente) */
+.hero h2 {
+font-size:34px; /* Aumentado sutilmente */
+font-weight:400;
+letter-spacing:14px;
+color:#fff;
+text-transform: uppercase;
+margin-top: 5px;
+}
+
+/* 4. "Dos grandes clássicos..." (Distanciado da frase superior) */
+.hero p {
+font-size: 18px;
+color: #e0e0e0;
+max-width: 750px;
+margin: 45px auto 35px; /* Margem de 45px no topo cria o distanciamento solicitado */
+line-height: 1.6;
+letter-spacing: 1px;
+}
 /* ==========================================================
    BOTÕES
 ========================================================== */
