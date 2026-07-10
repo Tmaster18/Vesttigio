@@ -302,9 +302,9 @@ text-transform: uppercase;
 .hero h2:nth-of-type(2),
 .hero h3,
 .hero .classic-rock-text {
-font-size: 35px !important; /* MODIFIQUE AQUI O TAMANHO DESTA FRASE */
+font-size: 25px !important; /* MODIFIQUE AQUI O TAMANHO DESTA FRASE */
 font-weight: 400;
-letter-spacing: 10px;
+letter-spacing: 5px;
 color: #fff;
 text-transform: uppercase;
 margin-top: -10px !important; /* MODIFIQUE AQUI PARA APROXIMAR DO VESTTIGIO */
