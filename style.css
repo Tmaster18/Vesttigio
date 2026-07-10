@@ -1,6 +1,6 @@
 /* ==========================================================
    VESTTIGIO - CLASSIC ROCK EXPERIENCE
-   STYLE.CSS
+   STYLE.CSS (FULL PAGE EDITION - 100VH PADDED)
 ========================================================== */
 
 /* ==========================================================
@@ -24,7 +24,7 @@ body{
     background:#050505;
     color:#fff;
     overflow-x:hidden;
-    line-height:1.6;
+    line-height:1.5;
 }
 
 img{
@@ -49,15 +49,29 @@ textarea{
     border:none;
 }
 
+/* MODIFICADO: Estrutura padrão para preenchimento de tela cheia sem vazar */
 section{
     position:relative;
-    padding:110px 7%;
+    width:100%;
+    height:100vh;
+    padding:100px 7% 30px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    box-sizing:border-box;
 }
 
+/* MODIFICADO: Container limitado à altura disponível da section */
 .container{
     width:100%;
     max-width:1400px;
     margin:auto;
+    max-height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
 
 /* ==========================================================
@@ -65,27 +79,17 @@ section{
 ========================================================== */
 
 :root{
-
 --bg:#050505;
 --bg2:#0d0d0d;
 --bg3:#171717;
-
 --white:#ffffff;
-
 --silver:#d9d9d9;
-
 --gray:#888;
-
 --line:#242424;
-
 --blue:#00b7ff;
-
 --blue2:#007cff;
-
 --shadow:0 20px 60px rgba(0,0,0,.45);
-
 --transition:.35s;
-
 }
 
 /* ==========================================================
@@ -93,45 +97,20 @@ section{
 ========================================================== */
 
 body{
-
-background:
-
-radial-gradient(circle at top,#1b1b1b 0%,#050505 65%);
-
+background:radial-gradient(circle at top,#1b1b1b 0%,#050505 65%);
 }
 
 body::before{
-
 content:"";
-
 position:fixed;
-
 left:0;
-
 top:0;
-
 width:100%;
-
 height:100%;
-
 pointer-events:none;
-
-background:
-
-linear-gradient(
-
-transparent,
-
-rgba(255,255,255,.015),
-
-transparent
-
-);
-
+background:linear-gradient(transparent,rgba(255,255,255,.015),transparent);
 animation:backgroundMove 18s linear infinite;
-
 opacity:.4;
-
 }
 
 /* ==========================================================
@@ -139,71 +118,35 @@ opacity:.4;
 ========================================================== */
 
 #loader{
-
 position:fixed;
-
 left:0;
-
 top:0;
-
 width:100%;
-
 height:100%;
-
 background:#000;
-
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 z-index:99999;
-
 }
 
 .loader-logo{
-
 font-size:65px;
-
 font-family:'Bebas Neue',sans-serif;
-
 letter-spacing:12px;
-
 color:#fff;
-
 position:relative;
-
 }
 
 .loader-logo::after{
-
 content:"";
-
 position:absolute;
-
 left:-20%;
-
 top:0;
-
 width:25%;
-
 height:100%;
-
-background:
-
-linear-gradient(
-
-90deg,
-
-transparent,
-
-rgba(255,255,255,.9),
-
-transparent);
-
+background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);
 animation:loaderLight 2.5s infinite;
-
 }
 
 /* ==========================================================
@@ -211,59 +154,35 @@ animation:loaderLight 2.5s infinite;
 ========================================================== */
 
 header{
-
 position:fixed;
-
 top:0;
-
 left:0;
-
 width:100%;
-
 height:85px;
-
 display:flex;
-
 align-items:center;
-
 justify-content:space-between;
-
 padding:0 6%;
-
 z-index:999;
-
 transition:.4s;
-
 background:rgba(0,0,0,.15);
-
 backdrop-filter:blur(10px);
-
 border-bottom:1px solid rgba(255,255,255,.05);
-
 }
 
 header.scrolled{
-
 height:72px;
-
 background:#050505;
-
 box-shadow:0 10px 40px rgba(0,0,0,.5);
-
 }
 
 .logo img{
-
 height:62px;
-
 transition:.4s;
-
 }
 
 header.scrolled .logo img{
-
 height:50px;
-
 }
 
 /* ==========================================================
@@ -271,69 +190,42 @@ height:50px;
 ========================================================== */
 
 nav ul{
-
 display:flex;
-
 gap:34px;
-
 align-items:center;
-
 }
 
 nav a{
-
 font-size:14px;
-
 letter-spacing:2px;
-
 font-weight:600;
-
 position:relative;
-
 transition:.3s;
-
 }
 
 nav a::after{
-
 content:"";
-
 position:absolute;
-
 left:0;
-
 bottom:-8px;
-
 width:0;
-
 height:2px;
-
 background:var(--blue);
-
 transition:.35s;
-
 }
 
 nav a:hover{
-
 color:var(--blue);
-
 }
 
 nav a:hover::after{
-
 width:100%;
-
 }
 
 .menu-mobile{
-
 display:none;
-
 font-size:30px;
-
 cursor:pointer;
-
 }
 
 /* ==========================================================
@@ -341,83 +233,43 @@ cursor:pointer;
 ========================================================== */
 
 #home{
-
 height:100vh;
-
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 overflow:hidden;
-
 position:relative;
-
 padding:0;
-
 background:url("assets/hero.jpg") center center/cover no-repeat;
-
 }
 
 #home::before{
-
 content:"";
-
 position:absolute;
-
 inset:0;
-
-background:
-
-linear-gradient(
-
-180deg,
-
-rgba(0,0,0,.45),
-
-rgba(0,0,0,.80));
-
+background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.80));
 }
 
 .video-overlay{
-
 position:absolute;
-
 inset:0;
-
-background:
-
-radial-gradient(circle,#00000000 0%,#000000bb 100%);
-
+background:radial-gradient(circle,#00000000 0%,#000000bb 100%);
 }
 
 .hero{
-
 position:relative;
-
 z-index:5;
-
 text-align:center;
-
 max-width:1000px;
-
 padding:20px;
-
 }
 
 .hero h2{
-
 font-size:30px;
-
 font-weight:300;
-
 letter-spacing:12px;
-
 margin-bottom:15px;
-
 color:#cfcfcf;
-
 }
 
 .hero h1{
@@ -426,14 +278,7 @@ color:#cfcfcf;
     letter-spacing:8px;
     line-height:.9;
     text-transform:uppercase;
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff,
-            #d6d6d6,
-            #777,
-            #fff
-        );
+    background:linear-gradient(180deg,#ffffff,#d6d6d6,#777,#fff);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
     background-clip:text;
@@ -446,59 +291,36 @@ color:#cfcfcf;
 ========================================================== */
 
 .buttons{
-
 display:flex;
-
 justify-content:center;
-
 gap:25px;
-
 flex-wrap:wrap;
-
 }
 
 .btn{
-
 padding:18px 42px;
-
 border:2px solid var(--blue);
-
 border-radius:50px;
-
 font-size:14px;
-
 font-weight:700;
-
 letter-spacing:3px;
-
 transition:.35s;
-
 background:var(--blue);
-
 color:#fff;
-
 box-shadow:0 0 30px rgba(0,183,255,.35);
-
 }
 
 .btn:hover{
-
 transform:translateY(-5px);
-
 box-shadow:0 15px 45px rgba(0,183,255,.55);
-
 }
 
 .btn.outline{
-
 background:transparent;
-
 }
 
 .btn.outline:hover{
-
 background:var(--blue);
-
 }
 
 /* ==========================================================
@@ -506,1350 +328,847 @@ background:var(--blue);
 ========================================================== */
 
 .lights{
-
 position:absolute;
-
 inset:0;
-
 overflow:hidden;
-
 pointer-events:none;
-
 z-index:2;
-
 }
 
 .light{
-
 position:absolute;
-
 top:-250px;
-
 width:420px;
-
 height:150vh;
-
 filter:blur(10px);
-
 opacity:.18;
-
 transform-origin:top center;
-
 mix-blend-mode:screen;
-
 }
 
 .light::before{
-
 content:"";
-
 position:absolute;
-
 left:50%;
-
 transform:translateX(-50%);
-
 width:100%;
-
 height:100%;
-
 clip-path:polygon(45% 0%,55% 0%,100% 100%,0% 100%);
-
-background:
-
-linear-gradient(
-
-180deg,
-
-rgba(255,255,255,.95),
-
-rgba(0,183,255,.20),
-
-transparent);
-
+background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(0,183,255,.20),transparent);
 }
 
 .light.one{
-
 left:8%;
-
 animation:lightLeft 9s ease-in-out infinite;
-
 }
 
 .light.two{
-
 left:50%;
-
 transform:translateX(-50%);
-
 animation:lightCenter 11s ease-in-out infinite;
-
 }
 
 .light.three{
-
 right:8%;
-
 animation:lightRight 10s ease-in-out infinite;
-
 }
-
 
 /* ==========================================================
    FUMAÇA
 ========================================================== */
 
 .smoke{
-
 position:absolute;
-
 inset:0;
-
 pointer-events:none;
-
 overflow:hidden;
-
 z-index:1;
-
 }
 
 .smoke::before,
-
 .smoke::after{
-
 content:"";
-
 position:absolute;
-
 width:180%;
-
 height:180%;
-
 left:-40%;
-
 bottom:-60%;
-
 opacity:.18;
-
-background:
-
-radial-gradient(circle,
-rgba(255,255,255,.20) 0%,
-rgba(255,255,255,.08) 20%,
-transparent 70%);
-
+background:radial-gradient(circle,rgba(255,255,255,.20) 0%,rgba(255,255,255,.08) 20%,transparent 70%);
 filter:blur(70px);
-
 animation:smokeMove 35s linear infinite;
-
 }
 
 .smoke::after{
-
 animation-delay:12s;
-
 opacity:.12;
-
 transform:scale(1.2);
-
 }
-
 
 /* ==========================================================
    SCROLL
 ========================================================== */
 
 .scroll{
-
 position:absolute;
-
 bottom:35px;
-
 left:50%;
-
 transform:translateX(-50%);
-
 z-index:10;
-
 }
 
 .scroll span{
-
 display:block;
-
 width:26px;
-
 height:46px;
-
 border:2px solid rgba(255,255,255,.7);
-
 border-radius:30px;
-
 position:relative;
-
 }
 
 .scroll span::before{
-
 content:"";
-
 position:absolute;
-
 left:50%;
-
 top:8px;
-
 transform:translateX(-50%);
-
 width:6px;
-
 height:8px;
-
 border-radius:50%;
-
 background:white;
-
 animation:scrollWheel 2s infinite;
-
 }
-
 
 /* ==========================================================
    TÍTULOS
 ========================================================== */
 
+/* MODIFICADO: Compactado margens para as seções curtas em vh */
 .section-title{
-
 text-align:center;
-
-margin-bottom:80px;
-
+margin-bottom:35px;
 }
 
 .section-title span{
-
 display:inline-block;
-
-font-size:15px;
-
-letter-spacing:8px;
-
+font-size:14px;
+letter-spacing:6px;
 color:var(--blue);
-
-margin-bottom:15px;
-
+margin-bottom:8px;
 font-weight:700;
-
 }
 
 .section-title h2{
-
 font-family:'Bebas Neue';
-
-font-size:70px;
-
-letter-spacing:5px;
-
-margin-bottom:18px;
-
+font-size:60px;
+letter-spacing:4px;
+margin-bottom:8px;
+line-height:1;
 }
 
 .section-title p{
-
 max-width:700px;
-
 margin:auto;
-
 color:#bcbcbc;
-
-font-size:18px;
-
-line-height:1.8;
-
+font-size:16px;
+line-height:1.6;
 }
-
 
 /* ==========================================================
    SOBRE
 ========================================================== */
 
 #about{
-
 background:#090909;
-
 }
 
 #about .container{
-
 display:grid;
-
 grid-template-columns:1fr 1fr;
-
-gap:90px;
-
+gap:60px;
 align-items:center;
-
 }
 
 .about-image{
-
 position:relative;
-
 }
 
 .about-image img{
-
 border-radius:10px;
-
 box-shadow:0 30px 70px rgba(0,0,0,.55);
-
 transition:.6s;
-
+max-height:60vh;
+object-fit:cover;
 }
 
 .about-image:hover img{
-
 transform:scale(1.02);
-
 }
 
 .about-image::after{
-
 content:"";
-
 position:absolute;
-
 left:-25px;
-
 bottom:-25px;
-
-width:180px;
-
-height:180px;
-
+width:140px;
+height:140px;
 border:2px solid var(--blue);
-
 z-index:-1;
-
 }
 
 .about-text span{
-
 color:var(--blue);
-
 letter-spacing:8px;
-
 font-size:15px;
-
 font-weight:700;
-
 }
 
 .about-text h2{
-
 font-family:'Bebas Neue';
-
-font-size:72px;
-
+font-size:64px;
 line-height:1;
-
-margin:20px 0 30px;
-
+margin:15px 0 20px;
 }
 
 .about-text p{
-
-font-size:18px;
-
-line-height:2;
-
-margin-bottom:25px;
-
+font-size:16px;
+line-height:1.8;
+margin-bottom:20px;
 color:#c8c8c8;
-
 }
 
 .numbers{
-
 display:flex;
-
 gap:45px;
-
-margin-top:50px;
-
+margin-top:30px;
 flex-wrap:wrap;
-
 }
 
 .numbers h3{
-
 font-family:'Bebas Neue';
-
-font-size:60px;
-
+font-size:50px;
 color:var(--blue);
-
 letter-spacing:2px;
-
+line-height:1;
 }
 
 .numbers p{
-
 margin:0;
-
-font-size:15px;
-
-letter-spacing:3px;
-
+font-size:13px;
+letter-spacing:2px;
 text-transform:uppercase;
-
 }
-
 
 /* ==========================================================
    INTEGRANTES
 ========================================================== */
 
 #members{
-
 background:#050505;
-
 }
 
+/* MODIFICADO: Travado a altura máxima em vh proporcional à tela */
 .members-grid{
     display:grid;
     grid-template-columns:repeat(3, 1fr);
-    gap:35px;
+    gap:30px;
+    width:100%;
     max-width:1200px;
     margin:0 auto;
+    height:50vh;
 }
 
 .member{
-
 background:#111;
-
 border:1px solid #222;
-
 border-radius:12px;
-
 overflow:hidden;
-
 transition:.45s;
-
 box-shadow:0 15px 40px rgba(0,0,0,.35);
-
+display:flex;
+flex-direction:column;
+height:100%;
 }
 
 .member:hover{
-
 transform:translateY(-12px);
-
 border-color:var(--blue);
-
 box-shadow:0 25px 60px rgba(0,183,255,.20);
-
 }
 
+/* MODIFICADO: Altura agora cresce flexivelmente ocupando a sobra do card */
 .member img{
-
 width:100%;
-
-height:420px;
-
+height:0;
+flex-grow:1;
 object-fit:cover;
-
+object-position:center top;
 transition:.6s;
-
 }
 
 .member:hover img{
-
 transform:scale(1.08);
-
 }
 
 .member h3{
-
 font-family:'Bebas Neue';
-
-font-size:34px;
-
+font-size:30px;
 letter-spacing:2px;
-
-padding:25px 25px 5px;
-
+padding:20px 20px 5px;
 }
 
 .member p{
-
-padding:0 25px 20px;
-
+padding:0 20px 15px;
 color:#bdbdbd;
-
 letter-spacing:2px;
-
+font-size:14px;
 }
 
 .social{
-
 display:flex;
-
-gap:18px;
-
-padding:0 25px 30px;
-
+gap:14px;
+padding:0 20px 20px;
 }
 
 .social a{
-
-width:42px;
-
-height:42px;
-
+width:38px;
+height:38px;
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 border-radius:50%;
-
 background:#1c1c1c;
-
 transition:.35s;
-
+font-size:14px;
 }
 
 .social a:hover{
-
 background:var(--blue);
-
-transform:translateY(-5px);
-
+transform:translateY(-3px);
 }
-
 
 /* ==========================================================
    SHOWS
 ========================================================== */
 
 #shows{
-
 background:#0d0d0d;
-
 }
 
+/* MODIFICADO: Inserida rolagem interna para caso a lista de shows cresça muito */
 .timeline{
-
 display:flex;
-
 flex-direction:column;
-
-gap:28px;
-
+gap:20px;
+width:100%;
 max-width:1100px;
-
 margin:auto;
+max-height:55vh;
+overflow-y:auto;
+padding-right:10px;
+}
 
+/* Customização leve do scroll interno dos shows */
+.timeline::-webkit-scrollbar {
+    width: 6px;
+}
+.timeline::-webkit-scrollbar-thumb {
+    background: var(--blue);
+    border-radius: 10px;
 }
 
 .show{
-
 display:grid;
-
 grid-template-columns:150px 1fr 180px;
-
 align-items:center;
-
 background:#151515;
-
 border-left:5px solid var(--blue);
-
-padding:28px;
-
+padding:22px;
 border-radius:8px;
-
 transition:.35s;
-
 }
 
 .show:hover{
-
 transform:translateX(10px);
-
 background:#1a1a1a;
-
 }
 
 .date{
-
 font-family:'Bebas Neue';
-
-font-size:46px;
-
+font-size:40px;
 color:var(--blue);
-
 letter-spacing:2px;
-
+line-height:1;
 }
 
 .info h3{
-
-font-size:28px;
-
-margin-bottom:6px;
-
+font-size:24px;
+margin-bottom:4px;
 }
 
 .info p{
-
 color:#bfbfbf;
-
+font-size:15px;
 }
 
 .ticket{
-
 justify-self:end;
-
-padding:14px 26px;
-
+padding:12px 24px;
 border:2px solid var(--blue);
-
 border-radius:30px;
-
 transition:.35s;
-
 font-weight:700;
-
 letter-spacing:2px;
-
+font-size:14px;
 }
 
 .ticket:hover{
-
 background:var(--blue);
-
 }
-
 
 /* ==========================================================
    GALERIA
 ========================================================== */
 
 #gallery{
-
 background:#050505;
-
 }
 
+/* MODIFICADO: Limitada a altura da galeria para caber na tela cheia */
 .gallery-grid{
-
 display:grid;
-
 grid-template-columns:repeat(4,1fr);
-
-grid-auto-rows:250px;
-
-gap:18px;
-
+grid-auto-rows:calc(26vh - 20px);
+gap:15px;
+width:100%;
 }
 
 .gallery-item{
-
 overflow:hidden;
-
 border-radius:8px;
-
 position:relative;
-
 cursor:pointer;
-
 }
 
 .gallery-item img{
-
 width:100%;
-
 height:100%;
-
 object-fit:cover;
-
 transition:.7s;
-
 }
 
 .gallery-item:hover img{
-
 transform:scale(1.12);
-
 }
 
 .gallery-item::after{
-
 content:"";
-
 position:absolute;
-
 inset:0;
-
-background:linear-gradient(transparent,
-rgba(0,0,0,.55));
-
+background:linear-gradient(transparent,rgba(0,0,0,.55));
 opacity:0;
-
 transition:.4s;
-
 }
 
 .gallery-item:hover::after{
-
 opacity:1;
-
 }
 
 .large{
-
 grid-column:span 2;
-
 grid-row:span 2;
-
 }
 
 .wide{
-
 grid-column:span 2;
-
 }
-
-
 
 /* ==========================================================
    PARALLAX
 ========================================================== */
 
 .parallax{
-
 position:relative;
-
-height:70vh;
-
+height:60vh;
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 text-align:center;
-
 overflow:hidden;
-
-background:
-
-url("assets/parallax.jpg")
-center center / cover fixed no-repeat;
-
+background:url("assets/parallax.jpg") center center / cover fixed no-repeat;
 }
 
 .parallax::before{
-
 content:"";
-
 position:absolute;
-
 inset:0;
-
-background:
-
-linear-gradient(
-180deg,
-rgba(0,0,0,.75),
-rgba(0,0,0,.35),
-rgba(0,0,0,.75));
-
+background:linear-gradient(180deg,rgba(0,0,0,.75),rgba(0,0,0,.35),rgba(0,0,0,.75));
 }
 
 .parallax .content{
-
 position:relative;
-
 z-index:2;
-
 max-width:900px;
-
 padding:20px;
-
 }
 
 .parallax h2{
-
 font-family:'Bebas Neue';
-
-font-size:90px;
-
+font-size:80px;
 letter-spacing:5px;
-
-margin-bottom:20px;
-
+margin-bottom:15px;
+line-height:1;
 }
 
 .parallax p{
-
-font-size:22px;
-
+font-size:20px;
 color:#dadada;
-
-line-height:1.8;
-
+line-height:1.6;
 }
-
 
 /* ==========================================================
    VIDEOS
 ========================================================== */
 
 #videos{
-
 background:#080808;
-
 }
 
+/* MODIFICADO: Limitado para caber no monitor sem estourar altura */
 .video-grid{
-
 display:grid;
-
 grid-template-columns:repeat(2,1fr);
-
-gap:45px;
-
+gap:30px;
+width:100%;
 }
 
 .video-card{
-
 position:relative;
-
 overflow:hidden;
-
 border-radius:12px;
-
 border:1px solid #222;
-
 box-shadow:0 20px 60px rgba(0,0,0,.45);
-
 transition:.45s;
-
 }
 
 .video-card:hover{
-
 transform:translateY(-10px);
-
 border-color:var(--blue);
-
 }
 
 .video-card iframe{
-
 width:100%;
-
-height:420px;
-
+height:34vh;
 display:block;
-
 }
-
 
 /* ==========================================================
    CONTADORES
 ========================================================== */
 
 .numbers-section{
-
 background:#050505;
-
-padding:90px 7%;
-
+height:60vh;
 }
 
 .numbers-section .container{
-
 display:grid;
-
 grid-template-columns:repeat(4,1fr);
-
-gap:30px;
-
+gap:25px;
 text-align:center;
-
 }
 
 .counter{
-
-padding:45px 20px;
-
+padding:35px 20px;
 border:1px solid #222;
-
 background:#101010;
-
 transition:.4s;
-
 }
 
 .counter:hover{
-
 transform:translateY(-10px);
-
 border-color:var(--blue);
-
 box-shadow:0 20px 50px rgba(0,183,255,.15);
-
 }
 
 .counter h2{
-
 font-family:'Bebas Neue';
-
-font-size:90px;
-
+font-size:75px;
 color:var(--blue);
-
 letter-spacing:2px;
-
+line-height:1;
 }
 
 .counter span{
-
 display:block;
-
-margin-top:12px;
-
+margin-top:10px;
 letter-spacing:3px;
-
-font-size:14px;
-
+font-size:13px;
 color:#cfcfcf;
-
 }
-
 
 /* ==========================================================
    SETLIST
 ========================================================== */
 
 #setlist{
-
 background:#090909;
-
 }
 
+/* MODIFICADO: Limitado a altura da grade com scroll se necessário */
 .songs{
-
 display:grid;
-
 grid-template-columns:repeat(3,1fr);
-
-gap:18px;
-
+gap:15px;
+width:100%;
+max-height:50vh;
+overflow-y:auto;
+padding-right:5px;
 }
 
 .songs div{
-
-padding:18px 25px;
-
+padding:15px 20px;
 background:#111;
-
 border-left:4px solid var(--blue);
-
-font-size:17px;
-
+font-size:16px;
 transition:.35s;
-
 }
 
 .songs div:hover{
-
 transform:translateX(10px);
-
 background:#181818;
-
 }
-
 
 /* ==========================================================
    DEPOIMENTOS
 ========================================================== */
 
 #reviews{
-
 background:#050505;
-
 }
 
 .reviews{
-
 display:grid;
-
 grid-template-columns:repeat(3,1fr);
-
-gap:35px;
-
+gap:30px;
+width:100%;
 }
 
 .reviews article{
-
 background:#111;
-
-padding:45px;
-
+padding:35px;
 border-radius:10px;
-
 border:1px solid #202020;
-
 transition:.4s;
-
 }
 
 .reviews article:hover{
-
 transform:translateY(-10px);
-
 border-color:var(--blue);
-
 }
 
 .stars{
-
-font-size:24px;
-
+font-size:20px;
 color:#ffd54f;
-
-margin-bottom:25px;
-
+margin-bottom:15px;
 letter-spacing:4px;
-
 }
 
 .reviews p{
-
-font-size:18px;
-
-line-height:1.9;
-
+font-size:16px;
+line-height:1.7;
 color:#d4d4d4;
-
-margin-bottom:30px;
-
+margin-bottom:20px;
 }
 
 .reviews h4{
-
 letter-spacing:2px;
-
-font-size:15px;
-
+font-size:14px;
 color:var(--blue);
-
 }
-
 
 /* ==========================================================
    CTA
 ========================================================== */
 
 .cta{
-
 position:relative;
-
-padding:150px 7%;
-
+height:60vh;
 text-align:center;
-
-background:
-
-linear-gradient(
-90deg,
-#000,
-#0b0b0b,
-#000);
-
+background:linear-gradient(90deg,#000,#0b0b0b,#000);
 overflow:hidden;
-
 }
 
 .cta::before{
-
 content:"";
-
 position:absolute;
-
 left:-20%;
-
 top:-30%;
-
 width:140%;
-
 height:220%;
-
-background:
-
-radial-gradient(circle,
-rgba(0,183,255,.15),
-transparent 65%);
-
+background:radial-gradient(circle,rgba(0,183,255,.15),transparent 65%);
 animation:rotateLight 20s linear infinite;
-
 }
 
 .cta .content{
-
 position:relative;
-
 z-index:2;
-
 }
 
 .cta h2{
-
 font-family:'Bebas Neue';
-
-font-size:80px;
-
+font-size:70px;
 letter-spacing:5px;
-
-margin-bottom:25px;
-
+margin-bottom:20px;
+line-height:1;
 }
 
 .cta p{
-
-font-size:20px;
-
-margin-bottom:45px;
-
+font-size:18px;
+margin-bottom:35px;
 color:#d8d8d8;
-
 }
-
 
 /* ==========================================================
    PRESS KIT
 ========================================================== */
 
 #presskit{
-
 background:#0c0c0c;
-
 }
 
 .press-grid{
-
 display:grid;
-
 grid-template-columns:repeat(4,1fr);
-
-gap:30px;
-
+gap:25px;
+width:100%;
 }
 
 .press-card{
-
 background:#111;
-
-padding:50px 30px;
-
+padding:35px 20px;
 text-align:center;
-
 border:1px solid #222;
-
 transition:.4s;
-
 }
 
 .press-card:hover{
-
 transform:translateY(-12px);
-
 border-color:var(--blue);
-
 }
 
 .press-card i{
-
-font-size:55px;
-
+font-size:45px;
 color:var(--blue);
-
-margin-bottom:25px;
-
+margin-bottom:20px;
 }
 
 .press-card h3{
-
 font-family:'Bebas Neue';
-
-font-size:34px;
-
-margin-bottom:15px;
-
+font-size:30px;
+margin-bottom:10px;
+line-height:1;
 }
 
 .press-card p{
-
-margin-bottom:30px;
-
+margin-bottom:25px;
 color:#c8c8c8;
-
-line-height:1.8;
-
+line-height:1.6;
+font-size:14px;
 }
 
 .press-card a{
-
 display:inline-block;
-
-padding:14px 28px;
-
+padding:12px 24px;
 border:2px solid var(--blue);
-
 transition:.35s;
-
+font-size:14px;
 }
 
 .press-card a:hover{
-
 background:var(--blue);
-
 }
-
 
 /* ==========================================================
    CONTATO
 ========================================================== */
 
 #contact{
-
 background:#050505;
-
 }
 
 .contact-grid{
-
 display:grid;
-
 grid-template-columns:1fr 1fr;
-
-gap:70px;
-
-align-items:start;
-
+gap:50px;
+align-items:center;
+width:100%;
 }
 
 .contact-info h2{
-
 font-family:'Bebas Neue';
-
-font-size:70px;
-
-margin:20px 0;
-
+font-size:60px;
+margin:15px 0;
+line-height:1;
 }
 
 .contact-info p{
-
-line-height:2;
-
-margin-bottom:35px;
-
+line-height:1.8;
+margin-bottom:25px;
 color:#d0d0d0;
-
+font-size:16px;
 }
 
 .contact-item{
-
 display:flex;
-
 align-items:center;
-
-gap:18px;
-
-margin-bottom:22px;
-
-font-size:18px;
-
+gap:15px;
+margin-bottom:18px;
+font-size:16px;
 }
 
 .contact-item i{
-
-width:48px;
-
-height:48px;
-
+width:42px;
+height:42px;
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 border-radius:50%;
-
 background:#111;
-
 color:var(--blue);
-
 }
 
 .contact-form{
-
 background:#111;
-
-padding:45px;
-
+padding:35px;
 border-radius:12px;
-
 }
 
 .contact-form input,
-
 .contact-form textarea{
-
 width:100%;
-
-padding:18px;
-
-margin-bottom:20px;
-
+padding:14px;
+margin-bottom:15px;
 background:#1a1a1a;
-
 color:white;
-
 border:1px solid #2b2b2b;
-
+font-size:15px;
 }
 
 .contact-form button{
-
-padding:18px 45px;
-
+padding:15px 40px;
 background:var(--blue);
-
 color:white;
-
 font-weight:700;
-
 letter-spacing:2px;
-
 cursor:pointer;
-
 transition:.35s;
-
+font-size:15px;
 }
 
 .contact-form button:hover{
-
 transform:translateY(-4px);
-
 }
-
 
 /* ==========================================================
    INSTAGRAM
@@ -1858,18 +1177,20 @@ transform:translateY(-4px);
 .instagram{
     background:#070707;
     text-align:center;
+    height:50vh;
 }
 
 .instagram-grid{
     display:grid;
     grid-template-columns:repeat(6,1fr);
     gap:10px;
-    margin-top:40px;
+    margin-top:30px;
+    width:100%;
 }
 
 .instagram-grid img{
     width:100%;
-    height:180px;
+    height:140px;
     object-fit:cover;
     filter:grayscale(30%);
     transition:.4s;
@@ -1880,7 +1201,6 @@ transform:translateY(-4px);
     transform:scale(1.05);
 }
 
-
 /* ==========================================================
    NEWSLETTER
 ========================================================== */
@@ -1888,18 +1208,20 @@ transform:translateY(-4px);
 .newsletter{
     background:#0b0b0b;
     text-align:center;
+    height:50vh;
 }
 
 .newsletter h2{
     font-family:'Bebas Neue';
-    font-size:60px;
+    font-size:54px;
     letter-spacing:4px;
-    margin-bottom:10px;
+    margin-bottom:8px;
+    line-height:1;
 }
 
 .newsletter p{
     color:#cfcfcf;
-    margin-bottom:30px;
+    margin-bottom:25px;
 }
 
 .newsletter form{
@@ -1910,7 +1232,7 @@ transform:translateY(-4px);
 }
 
 .newsletter input{
-    padding:16px 20px;
+    padding:14px 20px;
     width:320px;
     background:#151515;
     border:1px solid #2a2a2a;
@@ -1918,13 +1240,12 @@ transform:translateY(-4px);
 }
 
 .newsletter button{
-    padding:16px 30px;
+    padding:14px 30px;
     background:var(--blue);
     color:#fff;
     font-weight:700;
     cursor:pointer;
 }
-
 
 /* ==========================================================
    FOOTER
@@ -1932,33 +1253,35 @@ transform:translateY(-4px);
 
 footer{
     background:#050505;
-    padding:80px 7% 30px;
+    padding:60px 7% 25px;
     border-top:1px solid #1d1d1d;
+    height:auto;
 }
 
 .footer-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:40px;
-    margin-bottom:40px;
+    margin-bottom:30px;
 }
 
 footer h3{
     font-family:'Bebas Neue';
-    font-size:42px;
-    margin-bottom:10px;
+    font-size:38px;
+    margin-bottom:8px;
 }
 
 footer h4{
-    margin-bottom:20px;
+    margin-bottom:15px;
     color:var(--blue);
     letter-spacing:2px;
 }
 
 footer ul li{
-    margin-bottom:10px;
+    margin-bottom:8px;
     color:#bbb;
     transition:.3s;
+    font-size:14px;
 }
 
 footer ul li:hover{
@@ -1967,11 +1290,11 @@ footer ul li:hover{
 
 .copyright{
     text-align:center;
-    padding-top:25px;
+    padding-top:20px;
     border-top:1px solid #1a1a1a;
     color:#777;
+    font-size:13px;
 }
-
 
 /* ==========================================================
    BOTÃO TOPO
@@ -2002,45 +1325,16 @@ footer ul li:hover{
 }
 
 /* ==========================================================
-   RESPONSIVO - CORRIGIDO
+   RESPONSIVO - PROTEÇÃO PARA TELAS MENORES
 ========================================================== */
 
-/* ==========================================================
-   TELAS GRANDES (1200px - 1400px)
-========================================================== */
-
-.hero h1{
-    font-family:'Bebas Neue';
-    font-size:150px;
-    letter-spacing:8px;
-    line-height:.9;
-    text-transform:uppercase;
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff,
-            #d6d6d6,
-            #777,
-            #fff
-        );
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-    text-shadow:0 0 30px rgba(255,255,255,.15);
-    animation:titleGlow 4s infinite;
-}
-
-/* Responsivo */
-/* Responsivo */
 @media (max-width:1200px){
     .hero h1{
         font-size:110px;
     }
-
     .cta h2{
         font-size:60px;
     }
-
     .contact-info h2{
         font-size:56px;
     }
@@ -2067,10 +1361,23 @@ footer ul li:hover{
 }
 
 /* ==========================================================
-   TABLETS E TELAS MÉDIAS (992px)
+   TABLETS E TELAS MÉDIAS (992px) - CONVERSÃO PARA HEIGHT AUTO
 ========================================================== */
 
 @media (max-width:992px){
+
+    /* MODIFICADO: Remove a trava de 100vh em telas menores e deixa fluir por conteúdo */
+    section, .numbers-section, .instagram, .newsletter, .parallax{
+        height:auto !important;
+        overflow:visible !important;
+        padding:80px 5% 40px !important;
+    }
+
+    .members-grid, .timeline, .songs{
+        height:auto !important;
+        max-height:none !important;
+        overflow-y:visible !important;
+    }
 
     /* ---- MENU MOBILE ---- */
     .menu-mobile{
@@ -2086,7 +1393,6 @@ footer ul li:hover{
         color:var(--blue);
     }
 
-    /* Esconder o menu em telas menores */
     nav ul{
         display:none !important;
         position:fixed;
@@ -2125,19 +1431,7 @@ footer ul li:hover{
         display:none;
     }
 
-    /* Animação do menu */
-    @keyframes menuFade{
-        0%{
-            opacity:0;
-            transform:scale(.95);
-        }
-        100%{
-            opacity:1;
-            transform:scale(1);
-        }
-    }
-
-    /* ---- CONTEÚDO ---- */
+    /* ---- CONTEÚDO RESPONSIVO ---- */
     #about .container{
         grid-template-columns:1fr;
         gap:60px;
@@ -2156,7 +1450,7 @@ footer ul li:hover{
     }
 
     .member img{
-        height:320px;
+        height:320px !important;
     }
 
     .video-grid{
@@ -2164,7 +1458,7 @@ footer ul li:hover{
     }
 
     .video-card iframe{
-        height:340px;
+        height:340px !important;
     }
 
     .reviews{
@@ -2215,10 +1509,6 @@ footer ul li:hover{
         font-size:52px;
     }
 
-    .cta{
-        padding:100px 7%;
-    }
-
     .section-title h2{
         font-size:56px;
     }
@@ -2249,7 +1539,6 @@ footer ul li:hover{
         font-size:13px;
     }
 
-    /* Ajuste do header em mobile */
     header{
         padding:0 5%;
         height:75px;
@@ -2266,7 +1555,6 @@ footer ul li:hover{
     header.scrolled{
         height:65px;
     }
-
 }
 
 /* ==========================================================
@@ -2274,12 +1562,10 @@ footer ul li:hover{
 ========================================================== */
 
 @media (max-width:768px){
-
     section{
-        padding:80px 5%;
+        padding:80px 5% !important;
     }
 
-    /* ---- HERO ---- */
     .hero h1{
         font-size:72px;
         letter-spacing:4px;
@@ -2288,11 +1574,6 @@ footer ul li:hover{
     .hero h2{
         font-size:20px;
         letter-spacing:6px;
-    }
-
-    .hero h3{
-        font-size:22px;
-        letter-spacing:4px;
     }
 
     .hero p{
@@ -2310,9 +1591,8 @@ footer ul li:hover{
         gap:15px;
     }
 
-    /* ---- TÍTULOS ---- */
     .section-title{
-        margin-bottom:50px;
+        margin-bottom:30px;
     }
 
     .section-title span{
@@ -2329,7 +1609,6 @@ footer ul li:hover{
         font-size:16px;
     }
 
-    /* ---- SOBRE ---- */
     .about-text h2{
         font-size:44px;
     }
@@ -2350,7 +1629,6 @@ footer ul li:hover{
         font-size:13px;
     }
 
-    /* ---- INTEGRANTES ---- */
     .members-grid{
         grid-template-columns:1fr;
         max-width:450px;
@@ -2358,7 +1636,7 @@ footer ul li:hover{
     }
 
     .member img{
-        height:300px;
+        height:300px !important;
     }
 
     .member h3{
@@ -2366,7 +1644,6 @@ footer ul li:hover{
         padding:20px 20px 5px;
     }
 
-    /* ---- SHOWS ---- */
     .show{
         grid-template-columns:1fr;
         text-align:center;
@@ -2388,7 +1665,6 @@ footer ul li:hover{
         font-size:13px;
     }
 
-    /* ---- GALERIA ---- */
     .gallery-grid{
         grid-template-columns:repeat(2,1fr);
         grid-auto-rows:200px;
@@ -2401,12 +1677,10 @@ footer ul li:hover{
         grid-row:auto;
     }
 
-    /* ---- VÍDEOS ---- */
     .video-card iframe{
-        height:240px;
+        height:240px !important;
     }
 
-    /* ---- SETLIST ---- */
     .songs{
         grid-template-columns:1fr;
         gap:12px;
@@ -2417,7 +1691,6 @@ footer ul li:hover{
         font-size:15px;
     }
 
-    /* ---- DEPOIMENTOS ---- */
     .reviews article{
         padding:30px;
     }
@@ -2430,7 +1703,6 @@ footer ul li:hover{
         font-size:20px;
     }
 
-    /* ---- CONTATO ---- */
     .contact-info h2{
         font-size:42px;
     }
@@ -2451,7 +1723,6 @@ footer ul li:hover{
         width:100%;
     }
 
-    /* ---- PRESS KIT ---- */
     .press-grid{
         grid-template-columns:1fr;
         max-width:450px;
@@ -2470,12 +1741,6 @@ footer ul li:hover{
         font-size:28px;
     }
 
-    /* ---- PARALLAX ---- */
-    .parallax{
-        height:50vh;
-        background-attachment:scroll;
-    }
-
     .parallax h2{
         font-size:42px;
     }
@@ -2484,22 +1749,12 @@ footer ul li:hover{
         font-size:18px;
     }
 
-    /* ---- CTA ---- */
-    .cta{
-        padding:80px 5%;
-    }
-
     .cta h2{
         font-size:38px;
     }
 
     .cta p{
         font-size:17px;
-    }
-
-    /* ---- CONTADORES ---- */
-    .numbers-section{
-        padding:70px 5%;
     }
 
     .numbers-section .container{
@@ -2520,22 +1775,15 @@ footer ul li:hover{
         letter-spacing:2px;
     }
 
-    /* ---- NEWSLETTER ---- */
     .newsletter h2{
         font-size:40px;
     }
 
-    .newsletter input{
+    .newsletter input, .newsletter button{
         width:100%;
         max-width:400px;
     }
 
-    .newsletter button{
-        width:100%;
-        max-width:400px;
-    }
-
-    /* ---- FOOTER ---- */
     .footer-grid{
         grid-template-columns:1fr 1fr;
         gap:40px;
@@ -2550,7 +1798,6 @@ footer ul li:hover{
         font-size:16px;
     }
 
-    /* ---- INSTAGRAM ---- */
     .instagram-grid{
         grid-template-columns:repeat(3,1fr);
         gap:6px;
@@ -2560,7 +1807,6 @@ footer ul li:hover{
         height:120px;
     }
 
-    /* ---- BOTÃO TOPO ---- */
     #backTop{
         right:15px;
         bottom:15px;
@@ -2569,11 +1815,9 @@ footer ul li:hover{
         font-size:18px;
     }
 
-    /* ---- SCROLL ---- */
     .scroll{
         display:none;
     }
-
 }
 
 /* ==========================================================
@@ -2581,11 +1825,9 @@ footer ul li:hover{
 ========================================================== */
 
 @media (max-width:480px){
-
     section{
-        padding:60px 4%;
+        padding:60px 4% !important;
     }
-
 }
  
 /* ==========================================================
@@ -2593,47 +1835,14 @@ footer ul li:hover{
 ========================================================== */
 
 @media (max-width:360px){
-
-    .hero h1{
-        font-size:36px;
-    }
-
-    .hero h2{
-        font-size:14px;
-        letter-spacing:3px;
-    }
-
-    .hero h3{
-        font-size:16px;
-        letter-spacing:2px;
-    }
-
-    .section-title h2{
-        font-size:28px;
-    }
-
-    .about-text h2{
-        font-size:28px;
-    }
-
-    .contact-info h2{
-        font-size:28px;
-    }
-
-    .btn{
-        padding:10px 18px;
-        font-size:11px;
-        letter-spacing:2px;
-    }
-
-    .counter h2{
-        font-size:40px;
-    }
-
-    .instagram-grid img{
-        height:80px;
-    }
-
+    .hero h1{ font-size:36px; }
+    .hero h2{ font-size:14px; letter-spacing:3px; }
+    .section-title h2{ font-size:28px; }
+    .about-text h2{ font-size:28px; }
+    .contact-info h2{ font-size:28px; }
+    .btn{ padding:10px 18px; font-size:11px; letter-spacing:2px; }
+    .counter h2{ font-size:40px; }
+    .instagram-grid img{ height:80px; }
 }
 
 /* ==========================================================
@@ -2641,157 +1850,83 @@ footer ul li:hover{
 ========================================================== */
 
 @media (max-height:500px) and (orientation:landscape){
-
     #home{
         height:auto;
         min-height:100vh;
         padding:100px 5%;
     }
-
-    .hero h1{
-        font-size:60px;
-    }
-
-    .hero h2{
-        font-size:18px;
-    }
-
-    .hero h3{
-        font-size:20px;
-    }
-
-    .hero p{
-        font-size:15px;
-        margin:15px auto;
-    }
-
-    .buttons{
-        gap:12px;
-    }
-
-    .hero .btn{
-        padding:10px 20px;
-        font-size:12px;
-    }
-
-    .scroll{
-        display:none;
-    }
-
-    .light{
-        opacity:.08;
-    }
-
+    .hero h1{ font-size:60px; }
+    .hero h2{ font-size:18px; }
+    .hero p{ font-size:15px; margin:15px auto; }
+    .buttons{ gap:12px; }
+    .hero .btn{ padding:10px 20px; font-size:12px; }
+    .scroll, .light{ display:none; }
 }
 
 /* ==========================================================
-   ANIMAÇÕES - COMPLETO
+   ANIMAÇÕES
 ========================================================== */
 
 @keyframes titleGlow{
-    0%,100%{
-        text-shadow:0 0 25px rgba(255,255,255,.1);
-    }
-    50%{
-        text-shadow:0 0 45px rgba(0,183,255,.25);
-    }
+    0%,100%{ text-shadow:0 0 25px rgba(255,255,255,.1); }
+    50%{ text-shadow:0 0 45px rgba(0,183,255,.25); }
 }
-
 @keyframes loaderLight{
     0%{left:-30%;}
     100%{left:130%;}
 }
-
 @keyframes smokeMove{
     0%{transform:translateX(0) translateY(0);}
     50%{transform:translateX(60px) translateY(-40px);}
     100%{transform:translateX(0) translateY(0);}
 }
-
 @keyframes scrollWheel{
     0%{opacity:1;transform:translate(-50%,0);}
     100%{opacity:0;transform:translate(-50%,18px);}
 }
-
 @keyframes lightLeft{
     0%,100%{transform:rotate(-10deg);}
     50%{transform:rotate(-25deg);}
 }
-
 @keyframes lightCenter{
     0%,100%{transform:rotate(0deg);}
     50%{transform:rotate(15deg);}
 }
-
 @keyframes lightRight{
     0%,100%{transform:rotate(10deg);}
     50%{transform:rotate(25deg);}
 }
-
 @keyframes rotateLight{
     from{transform:rotate(0deg);}
     to{transform:rotate(360deg);}
 }
-
-/* ANIMAÇÃO QUE ESTAVA FALTANDO */
 @keyframes backgroundMove{
-    0%{
-        transform:translateY(0);
-        opacity:.4;
-    }
-    50%{
-        opacity:.6;
-    }
-    100%{
-        transform:translateY(-100%);
-        opacity:.4;
-    }
+    0%{ transform:translateY(0); opacity:.4; }
+    50%{ opacity:.6; }
+    100%{ transform:translateY(-100%); opacity:.4; }
 }
-
-/* ANIMAÇÃO DO MENU MOBILE */
 @keyframes menuFade{
-    0%{
-        opacity:0;
-        transform:scale(.95);
-    }
-    100%{
-        opacity:1;
-        transform:scale(1);
-    }
+    0%{ opacity:0; transform:scale(.95); }
+    100%{ opacity:1; transform:scale(1); }
 }
 
 /* ==========================================================
-   SCROLL REVEAL
+   SCROLL REVEAL E AUXILIARES
 ========================================================== */
 
 .revealed{
-
     opacity:1 !important;
-
     transform:translate3d(0,0,0) !important;
-
 }
-
-/* ==========================================================
-   PERFORMANCE
-========================================================== */
-
 .page-hidden *{
-
     animation-play-state:paused !important;
-
 }
-
 .reduce-motion *{
-
     animation:none !important;
-
     transition:none !important;
-
     scroll-behavior:auto !important;
-
 }
 
 /* ==========================================================
-   FINAL
+   FIM DO ARQUIVO
 ========================================================== */
