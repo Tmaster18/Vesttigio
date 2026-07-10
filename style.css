@@ -723,7 +723,7 @@ animation:scrollWheel 2s infinite;
 
 text-align:center;
 
-margin-bottom:80px;
+margin-bottom:40px; /* Reduzido de 80px para compactar na vertical */
 
 }
 
@@ -737,7 +737,7 @@ letter-spacing:8px;
 
 color:var(--blue);
 
-margin-bottom:15px;
+margin-bottom:8px; /* Reduzido ligeiramente */
 
 font-weight:700;
 
@@ -751,7 +751,7 @@ font-size:70px;
 
 letter-spacing:5px;
 
-margin-bottom:18px;
+margin-bottom:10px; /* Reduzido ligeiramente */
 
 }
 
@@ -908,37 +908,42 @@ text-transform:uppercase;
 
 
 /* ==========================================================
-   INTEGRANTES
+   INTEGRANTES (ALTERADO PARA TELA CHEIA 1920x1080)
 ========================================================== */
 
-#members{
-
-background:#050505;
-
+#members {
+    background: #050505;
+    width: 100%;
+    height: 100vh; /* Seção ocupa exatamente a altura visível da tela */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 110px 7% 40px 7%; /* Padding menor embaixo para subir as fotos */
+    overflow: hidden; /* Corta vazamentos na vertical */
+    box-sizing: border-box;
 }
 
-.members-grid{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:35px;
-    max-width:1200px;
-    margin:0 auto;
+.members-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 52vh; /* Limita a grade a no máximo 52% da altura total do monitor */
 }
 
-.member{
-
-background:#111;
-
-border:1px solid #222;
-
-border-radius:12px;
-
-overflow:hidden;
-
-transition:.45s;
-
-box-shadow:0 15px 40px rgba(0,0,0,.35);
-
+.member {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: .45s;
+    box-shadow: 0 15px 40px rgba(0,0,0,.35);
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Força o card a respeitar os 52vh do container pai */
 }
 
 .member:hover{
@@ -951,16 +956,13 @@ box-shadow:0 25px 60px rgba(0,183,255,.20);
 
 }
 
-.member img{
-
-width:100%;
-
-height:420px;
-
-object-fit:cover;
-
-transition:.6s;
-
+.member img {
+    width: 100%;
+    height: 0; /* Reseta o valor antigo fixo */
+    flex-grow: 1; /* Faz a imagem crescer dinamicamente ocupando o espaço que sobra do card */
+    object-fit: cover;
+    object-position: center top; /* Centraliza no rosto dos músicos */
+    transition: .6s;
 }
 
 .member:hover img{
@@ -2151,12 +2153,19 @@ footer ul li:hover{
         font-size:52px;
     }
 
+    /* Reset de herança para grid em mobile */
+    #members {
+        height: auto !important;
+        overflow: visible !important;
+    }
+
     .members-grid{
         grid-template-columns:repeat(2,1fr);
+        height: auto !important;
     }
 
     .member img{
-        height:320px;
+        height:320px !important;
     }
 
     .video-grid{
@@ -2355,10 +2364,11 @@ footer ul li:hover{
         grid-template-columns:1fr;
         max-width:450px;
         margin:0 auto;
+        height: auto !important;
     }
 
     .member img{
-        height:300px;
+        height:300px !important;
     }
 
     .member h3{
