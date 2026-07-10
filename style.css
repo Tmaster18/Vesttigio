@@ -229,7 +229,7 @@ cursor:pointer;
 }
 
 /* ==========================================================
-   HERO (ORGANIZADO POR HIERARQUIA DE TEXTO)
+   HERO (CORREÇÃO DE CONFLITO DE TAGS)
 ========================================================== */
 
 #home{
@@ -264,23 +264,27 @@ max-width:1000px;
 padding:20px;
 }
 
-/* 1. "THE ULTIMATE" */
+/* ==========================================================
+   1. "THE ULTIMATE" (Texto que fica ACIMA do Vesttigio)
+========================================================== */
+.hero h2:first-of-type, 
 .hero .hero-top-text {
-font-size: 24px;
+font-size: 24px !important; /* Tamanho menor para o topo */
 font-weight: 300;
 letter-spacing: 12px;
 margin-bottom: 10px;
 color: #cfcfcf;
 text-transform: uppercase;
-display: block;
 }
 
-/* 2. "VESTTIGIO" (Nome principal iluminado) */
+/* ==========================================================
+   2. "VESTTIGIO" (Nome principal gigante)
+========================================================== */
 .hero h1{
     font-family:'Bebas Neue';
     font-size:150px;
     letter-spacing:8px;
-    line-height:.9;
+    line-height:.85; /* Aproxima as letras verticalmente */
     text-transform:uppercase;
     background:linear-gradient(180deg,#ffffff,#d6d6d6,#777,#fff);
     -webkit-background-clip:text;
@@ -288,25 +292,33 @@ display: block;
     background-clip:text;
     text-shadow:0 0 30px rgba(255,255,255,.15);
     animation:titleGlow 4s infinite;
-    margin-bottom: 15px;
+    margin-bottom: 0px; /* Zerado para colar a frase de baixo */
 }
 
-/* 3. "CLASSIC ROCK EXPERIENCE" (Aumentado Sutilmente) */
-.hero h2 {
-font-size:25px; /* Aumentado sutilmente */
-font-weight:400;
-letter-spacing:14px;
-color:#fff;
+/* ==========================================================
+   3. "CLASSIC ROCK EXPERIENCE" (Abaixo do Vesttigio)
+========================================================== */
+/* Se no seu HTML ele for o segundo h2, ou um h3, ou um p pesado: */
+.hero h2:nth-of-type(2),
+.hero h3,
+.hero .classic-rock-text {
+font-size: 34px !important; /* MODIFIQUE AQUI O TAMANHO DESTA FRASE */
+font-weight: 400;
+letter-spacing: 14px;
+color: #fff;
 text-transform: uppercase;
-margin-top: 5px;
+margin-top: -10px !important; /* MODIFIQUE AQUI PARA APROXIMAR DO VESTTIGIO */
+display: block;
 }
 
-/* 4. "Dos grandes clássicos..." (Distanciado da frase superior) */
-.hero p {
+/* ==========================================================
+   4. "Dos grandes clássicos..." (Frase descritiva final)
+========================================================== */
+.hero p:last-of-type {
 font-size: 18px;
 color: #e0e0e0;
 max-width: 750px;
-margin: 45px auto 35px; /* Margem de 45px no topo cria o distanciamento solicitado */
+margin: 45px auto 35px; /* Mantém o distanciamento visual */
 line-height: 1.6;
 letter-spacing: 1px;
 }
