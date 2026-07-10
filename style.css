@@ -1143,84 +1143,90 @@ background:var(--blue);
 }
 
 /* ==========================================================
-   CONTATO
+   CONTATO (COMPACTADO VERTICALMENTE)
 ========================================================== */
 
-#contact{
-background:#050505;
+#contact {
+    background: #050505;
 }
 
-.contact-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:50px;
-align-items:center;
-width:100%;
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px; /* Reduzido o espaçamento lateral */
+    align-items: center;
+    width: 100%;
 }
 
-.contact-info h2{
-font-family:'Bebas Neue';
-font-size:60px;
-margin:15px 0;
-line-height:1;
+.contact-info h2 {
+    font-family: 'Bebas Neue';
+    font-size: 48px; /* Reduzido de 60px para 48px */
+    margin: 10px 0;
+    line-height: 1;
 }
 
-.contact-info p{
-line-height:1.8;
-margin-bottom:25px;
-color:#d0d0d0;
-font-size:16px;
+.contact-info p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #d0d0d0;
+    font-size: 15px;
 }
 
-.contact-item{
-display:flex;
-align-items:center;
-gap:15px;
-margin-bottom:18px;
-font-size:16px;
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px; /* Menor espaçamento entre itens */
+    font-size: 15px;
 }
 
-.contact-item i{
-width:42px;
-height:42px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:50%;
-background:#111;
-color:var(--blue);
+.contact-item i {
+    width: 36px; /* Ícones ligeiramente menores */
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #111;
+    color: var(--blue);
+    font-size: 14px;
 }
 
-.contact-form{
-background:#111;
-padding:35px;
-border-radius:12px;
+.contact-form {
+    background: #111;
+    padding: 25px 30px; /* Reduzido padding vertical interno */
+    border-radius: 12px;
 }
 
 .contact-form input,
-.contact-form textarea{
-width:100%;
-padding:14px;
-margin-bottom:15px;
-background:#1a1a1a;
-color:white;
-border:1px solid #2b2b2b;
-font-size:15px;
+.contact-form textarea {
+    width: 100%;
+    padding: 11px 14px; /* Inputs mais finos para economizar altura */
+    margin-bottom: 12px; /* Margem menor entre os campos */
+    background: #1a1a1a;
+    color: white;
+    border: 1px solid #2b2b2b;
+    font-size: 14px;
 }
 
-.contact-form button{
-padding:15px 40px;
-background:var(--blue);
-color:white;
-font-weight:700;
-letter-spacing:2px;
-cursor:pointer;
-transition:.35s;
-font-size:15px;
+.contact-form textarea {
+    height: 90px; /* Altura da caixa de texto limitada para não esticar a seção */
+    resize: none;
 }
 
-.contact-form button:hover{
-transform:translateY(-4px);
+.contact-form button {
+    padding: 12px 35px; /* Botão mais compacto */
+    background: var(--blue);
+    color: white;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: .35s;
+    font-size: 14px;
+}
+
+.contact-form button:hover {
+    transform: translateY(-3px);
 }
 
 /* ==========================================================
@@ -1254,51 +1260,6 @@ transform:translateY(-4px);
     transform:scale(1.05);
 }
 
-/* ==========================================================
-   NEWSLETTER
-========================================================== */
-
-.newsletter{
-    background:#0b0b0b;
-    text-align:center;
-    height:50vh;
-}
-
-.newsletter h2{
-    font-family:'Bebas Neue';
-    font-size:54px;
-    letter-spacing:4px;
-    margin-bottom:8px;
-    line-height:1;
-}
-
-.newsletter p{
-    color:#cfcfcf;
-    margin-bottom:25px;
-}
-
-.newsletter form{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.newsletter input{
-    padding:14px 20px;
-    width:320px;
-    background:#151515;
-    border:1px solid #2a2a2a;
-    color:#fff;
-}
-
-.newsletter button{
-    padding:14px 30px;
-    background:var(--blue);
-    color:#fff;
-    font-weight:700;
-    cursor:pointer;
-}
 
 /* ==========================================================
    FOOTER
