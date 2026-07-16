@@ -337,110 +337,118 @@ cursor:pointer;
 }
 
 /* ==========================================================
-   HERO
+   HERO SECTION (HOME)
 ========================================================== */
-
-#home{
-
-height:100vh;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-overflow:hidden;
-
-position:relative;
-
-padding:0;
-
-background:url("assets/hero.jpg") center center/cover no-repeat;
-
+#home {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* Aqui aplicamos a imagem de fundo com uma máscara escura para dar contraste ao texto */
+    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85)), url('assets/hero.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+    padding-top: 85px;
 }
 
-#home::before{
-
-content:"";
-
-position:absolute;
-
-inset:0;
-
-background:
-
-linear-gradient(
-
-180deg,
-
-rgba(0,0,0,.45),
-
-rgba(0,0,0,.80));
-
+.hero {
+    z-index: 2;
+    max-width: 900px;
+    padding: 0 20px;
 }
 
-.video-overlay{
-
-position:absolute;
-
-inset:0;
-
-background:
-
-radial-gradient(circle,#00000000 0%,#000000bb 100%);
-
+.hero h1 {
+    font-family: var(--font-title);
+    font-size: 95px;
+    line-height: 0.9;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    background: linear-gradient(180deg, #fff 0%, #aaa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
-.hero{
-
-position:relative;
-
-z-index:5;
-
-text-align:center;
-
-max-width:1000px;
-
-padding:20px;
-
+.hero h2 {
+    font-size: 18px;
+    letter-spacing: 8px;
+    color: #888;
+    margin-bottom: 10px;
 }
 
-.hero h2{
-
-font-size:30px;
-
-font-weight:300;
-
-letter-spacing:12px;
-
-margin-bottom:15px;
-
-color:#cfcfcf;
-
+.hero h3 {
+    font-size: 20px;
+    letter-spacing: 6px;
+    color: var(--primary-color);
+    margin-bottom: 25px;
 }
 
-.hero h1{
-    font-family:'Bebas Neue';
-    font-size:150px;
-    letter-spacing:8px;
-    line-height:.9;
-    text-transform:uppercase;
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff,
-            #d6d6d6,
-            #777,
-            #fff
-        );
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-    text-shadow:0 0 30px rgba(255,255,255,.15);
-    animation:titleGlow 4s infinite;
+.hero p {
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: #ccc;
+    margin-bottom: 40px;
+    text-transform: none;
 }
 
+/* ==========================================================
+   SISTEMA DE LUZES DE PALCO (.lights)
+========================================================== */
+.lights {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.light {
+    position: absolute;
+    top: -50px;
+    width: 150px;
+    height: 150%;
+    background: radial-gradient(ellipse at top, rgba(0, 183, 255, 0.15) 0%, rgba(0, 183, 255, 0) 70%);
+    transform-origin: top center;
+    mix-blend-mode: screen;
+}
+
+.light.one {
+    left: 20%;
+    transform: rotate(-15deg);
+    animation: lightLeft 10s infinite ease-in-out;
+}
+
+.light.two {
+    left: 50%;
+    transform: translateX(-50%);
+    animation: lightCenter 12s infinite ease-in-out;
+}
+
+.light.three {
+    right: 20%;
+    transform: rotate(15deg);
+    animation: lightRight 10s infinite ease-in-out;
+}
+
+@keyframes lightLeft {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(-25deg); }
+}
+@keyframes lightCenter {
+    0%, 100% { transform: translateX(-50%) rotate(0deg); }
+    50% { transform: translateX(-50%) rotate(15deg); }
+}
+@keyframes lightRight {
+    0%, 100% { transform: rotate(10deg); }
+    50% { transform: rotate(25deg); }
+}
 /* ==========================================================
    BOTÕES
 ========================================================== */
