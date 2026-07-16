@@ -1,176 +1,101 @@
-
 /* ==========================================================
-   VESTTIGIO - SCRIPT.JS
+   VESTTIGIO - SCRIPT.JS (Otimizado para Desempenho)
 ========================================================== */
 
-/* ==========================================================
-   LOADER
-========================================================== */
-
+/* --- LOADER --- */
 window.addEventListener("load", () => {
     const loader = document.getElementById("loader");
-    setTimeout(() => {
-        loader.style.opacity = "0";
-        loader.style.pointerEvents = "none";
-        loader.style.transition = "1s";
-    }, 1200);
-});
-
-
-/* ==========================================================
-   HEADER SCROLL
-========================================================== */
-
-const header = document.getElementById("header");
-
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 80) {
-        header.classList.add("scrolled");
-    } else {
-        header.classList.remove("scrolled");
+    if (loader) {
+        setTimeout(() => {
+            loader.style.opacity = "0";
+            loader.style.pointerEvents = "none";
+            loader.style.transition = "opacity 0.8s ease";
+        }, 1000);
     }
 });
 
-
-/* ==========================================================
-   MENU MOBILE
-========================================================== */
-
-const menuMobile = document.querySelector(".menu-mobile");
-const nav = document.querySelector("nav ul");
-
-menuMobile.addEventListener("click", () => {
-    nav.classList.toggle("active");
-});
-
-
-/* ==========================================================
-   BACK TO TOP
-========================================================== */
-
-const backTop = document.getElementById("backTop");
-
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 400) {
-        backTop.classList.add("active");
-    } else {
-        backTop.classList.remove("active");
-    }
-});
-
-backTop.addEventListener("click", () => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-});
-
-
-/* ==========================================================
-   CONTADORES - CORRIGIDO
-========================================================== */
-
-const counters = document.querySelectorAll(".counter h2");
-let countersAnimated = false;
-
-const animateCounters = () => {
-    if (countersAnimated) return;
-    countersAnimated = true;
-
-    counters.forEach(counter => {
-        const target = +counter.getAttribute("data-target");
-        let count = 0;
-        const duration = 2000;
-        const steps = 60;
-        const increment = target / steps;
-        let step = 0;
-
-        const update = () => {
-            step++;
-            count += increment;
-            if (step < steps) {
-                counter.innerText = Math.floor(count);
-                requestAnimationFrame(update);
-            } else {
-                counter.innerText = target;
-            }
-        };
-        update();
-    });
-};
-
-// Observer para a seção de números
-const counterSection = document.querySelector(".numbers-section");
-if (counterSection) {
-    const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !countersAnimated) {
-                animateCounters();
-            }
-        });
-    }, { threshold: 0.3 });
-    
-    counterObserver.observe(counterSection);
-}
-
-/* ==========================================================
-   SCROLL REVEAL SIMPLES
-========================================================== */
-
-const revealElements = document.querySelectorAll(
-    ".member, .show, .gallery-item, .press-card, .reviews article"
-);
-
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = 1;
-            entry.target.style.transform = "translateY(0)";
-            entry.target.style.transition = "0.8s ease";
-        }
-    });
-}, {
-    threshold: 0.1
-});
-
-revealElements.forEach(el => {
-    el.style.opacity = 0;
-    el.style.transform = "translateY(40px)";
-    revealObserver.observe(el);
-});
-
-
-/* ==========================================================
-   SMOOTH SCROLL LINKS
-========================================================== */
-
+/* --- SMOOTH SCROLL CORRIGIDO --- */
 document.querySelectorAll("a[href^='#']").forEach(link => {
     link.addEventListener("click", function (e) {
-        e.preventDefault();
-
-        const target = document.querySelector(this.getAttribute("href"));
-
+        const targetId = this.getAttribute("href");
+        if (targetId === "#") return;
+        
+        const target = document.querySelector(targetId);
         if (target) {
-            target.scrollIntoView({
+            e.preventDefault();
+            const header = document.getElementById("header");
+            const headerHeight = header ? header.offsetHeight : 0;
+            const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+            
+            window.scrollTo({
+                top: targetPosition - headerHeight,
                 behavior: "smooth"
             });
         }
     });
 });
 
+/* --- MENU MOBILE --- */
+const menuMobile = document.querySelector(".menu-mobile");
+const nav = document.querySelector("nav ul");
+const navLinks = document.querySelectorAll("nav ul li a");
 
-/* ==========================================================
-   LIGHT PARTICLES (OTIMIZADO)
-========================================================== */
+if (menuMobile && nav) {
+    menuMobile.addEventListener("click", () => {
+        nav.classList.toggle("active");
+    });
 
-const particles = document.getElementById("particles");
+    navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            nav.classList.remove("active");
+        });
+    });
+}
 
-if (particles) {
+/* --- BACK TO TOP --- */
+const backTop = document.getElementById("backTop");
+if (backTop) {
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 400) {
+            backTop.classList.add("active");
+        } else {
+            backTop.classList.remove("active");
+        }
+    }, { passive: true });
+
+    backTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+}
+
+/* --- SCROLL REVEAL (Sem Reflow via CSS Nativo) --- */
+const revealElements = document.querySelectorAll(".reveal-item");
+
+if (revealElements.length > 0 && 'IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("revealed");
+                revealObserver.unobserve(entry.target); // Libera o observer do elemento ativo
+            }
+        });
+    }, { threshold: 0.05 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+}
+
+/* --- LIGHT PARTICLES (Otimizado com Interseção) --- */
+const particlesContainer = document.getElementById("particles");
+const homeSection = document.getElementById("home");
+
+if (particlesContainer && homeSection && 'IntersectionObserver' in window) {
     let animationId;
     let lastTime = 0;
-    const interval = window.innerWidth < 768 ? 800 : 350;
+    const interval = window.innerWidth < 768 ? 900 : 400;
+    let active = false;
 
     function createParticle() {
+        if (!active) return;
         const p = document.createElement("span");
         const size = Math.random() * 3 + 2;
 
@@ -180,24 +105,18 @@ if (particles) {
         p.style.left = Math.random() * 100 + "%";
         p.style.bottom = "-20px";
         p.style.borderRadius = "50%";
-        p.style.background = "rgba(0,183,255,.45)";
+        p.style.background = "rgba(0,183,255,.40)";
         p.style.pointerEvents = "none";
         p.style.opacity = Math.random();
 
-        particles.appendChild(p);
+        particlesContainer.appendChild(p);
 
-        const distance = window.innerHeight + 200;
-        const duration = 6000 + Math.random() * 4000;
+        const distance = window.innerHeight + 100;
+        const duration = 6000 + Math.random() * 3000;
 
         p.animate([
-            {
-                transform: "translateY(0)",
-                opacity: p.style.opacity
-            },
-            {
-                transform: `translateY(-${distance}px)`,
-                opacity: 0
-            }
+            { transform: "translateY(0)", opacity: p.style.opacity },
+            { transform: `translateY(-${distance}px)`, opacity: 0 }
         ], {
             duration: duration,
             easing: "linear"
@@ -207,6 +126,7 @@ if (particles) {
     }
 
     function animate(time) {
+        if (!active) return;
         if (time - lastTime > interval) {
             createParticle();
             lastTime = time;
@@ -214,31 +134,19 @@ if (particles) {
         animationId = requestAnimationFrame(animate);
     }
 
-    animationId = requestAnimationFrame(animate);
+    // Desativa partículas fora da viewport para economizar bateria e CPU
+    const particlesObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                active = true;
+                lastTime = performance.now();
+                animationId = requestAnimationFrame(animate);
+            } else {
+                active = false;
+                cancelAnimationFrame(animationId);
+            }
+        });
+    }, { threshold: 0.05 });
 
-    document.addEventListener("visibilitychange", () => {
-        if (document.hidden) {
-            cancelAnimationFrame(animationId);
-        } else {
-            lastTime = performance.now();
-            animationId = requestAnimationFrame(animate);
-        }
-    });
+    particlesObserver.observe(homeSection);
 }
-
-/* ==========================================================
-   HEADER MOBILE FIX (BÁSICO)
-========================================================== */
-
-const navLinks = document.querySelectorAll("nav ul li a");
-
-navLinks.forEach(link => {
-    link.addEventListener("click", () => {
-        nav.classList.remove("active");
-    });
-});
-
-
-/* ==========================================================
-   FINAL
-========================================================== */

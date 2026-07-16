@@ -1734,131 +1734,86 @@ background:var(--blue);
    CONTATO
 ========================================================== */
 
-#contact{
-
-background:#050505;
-
+#contact {
+    background: #050505;
+    padding: 110px 7%;
 }
 
-.contact-grid{
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:70px;
-
-align-items:start;
-
+.contact-info {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.contact-info h2{
-
-font-family:'Bebas Neue';
-
-font-size:70px;
-
-margin:20px 0;
-
+.contact-info span {
+    color: var(--blue);
+    letter-spacing: 8px;
+    font-size: 15px;
+    font-weight: 700;
 }
 
-.contact-info p{
-
-line-height:2;
-
-margin-bottom:35px;
-
-color:#d0d0d0;
-
+.contact-info h2 {
+    font-family: 'Bebas Neue';
+    font-size: 70px;
+    margin: 20px 0;
+    line-height: 1.1;
 }
 
-.contact-item{
-
-display:flex;
-
-align-items:center;
-
-gap:18px;
-
-margin-bottom:22px;
-
-font-size:18px;
-
+.contact-info p {
+    line-height: 2;
+    margin-bottom: 45px;
+    color: #d0d0d0;
+    font-size: 18px;
 }
 
-.contact-item i{
-
-width:48px;
-
-height:48px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-border-radius:50%;
-
-background:#111;
-
-color:var(--blue);
-
+.contact-methods {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 20px;
 }
 
-.contact-form{
-
-background:#111;
-
-padding:45px;
-
-border-radius:12px;
-
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 18px;
+    background: #111;
+    padding: 20px 35px;
+    border-radius: 50px;
+    border: 1px solid #222;
+    transition: var(--transition);
 }
 
-.contact-form input,
-
-.contact-form textarea{
-
-width:100%;
-
-padding:18px;
-
-margin-bottom:20px;
-
-background:#1a1a1a;
-
-color:white;
-
-border:1px solid #2b2b2b;
-
+.contact-item:hover {
+    border-color: var(--blue);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 183, 255, 0.15);
 }
 
-.contact-form button{
-
-padding:18px 45px;
-
-background:var(--blue);
-
-color:white;
-
-font-weight:700;
-
-letter-spacing:2px;
-
-cursor:pointer;
-
-transition:.35s;
-
+.contact-item i {
+    font-size: 28px;
+    color: var(--blue);
 }
 
-.contact-form button:hover{
-
-transform:translateY(-4px);
-
+.contact-item div {
+    text-align: left;
 }
 
+.contact-item span {
+    display: block;
+    font-size: 12px;
+    color: #888;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: normal;
+}
 
+.contact-item strong {
+    font-size: 20px;
+    color: #fff;
+}
 /* ==========================================================
    INSTAGRAM
 ========================================================== */
