@@ -68,48 +68,6 @@ if (backTop) {
     });
 }
 
-/* --- CONTADORES --- */
-const counters = document.querySelectorAll(".counter h2");
-const counterSection = document.querySelector(".numbers-section");
-let countersAnimated = false;
-
-const animateCounters = () => {
-    if (countersAnimated) return;
-    countersAnimated = true;
-
-    counters.forEach(counter => {
-        const target = +counter.getAttribute("data-target");
-        let count = 0;
-        const duration = 1500; // Tempo em ms
-        const stepTime = 20;
-        const steps = duration / stepTime;
-        const increment = target / steps;
-
-        const update = () => {
-            count += increment;
-            if (count < target) {
-                counter.innerText = Math.floor(count);
-                setTimeout(update, stepTime);
-            } else {
-                counter.innerText = target;
-            }
-        };
-        update();
-    });
-};
-
-if (counterSection && 'IntersectionObserver' in window) {
-    const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !countersAnimated) {
-                animateCounters();
-            }
-        });
-    }, { threshold: 0.2 });
-    
-    counterObserver.observe(counterSection);
-}
-
 /* --- SCROLL REVEAL (Sem Reflow via CSS Nativo) --- */
 const revealElements = document.querySelectorAll(".reveal-item");
 

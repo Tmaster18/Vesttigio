@@ -364,11 +364,11 @@ nav ul li a:hover::after {
 }
 
 /* ==========================================================
-   MEMBROS DA BANDA (Ajustado para 3 Integrantes)
+   MEMBROS DA BANDA
 ========================================================== */
 .members-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colunas para 3 membros */
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
 }
 
@@ -555,52 +555,6 @@ nav ul li a:hover::after {
 }
 
 /* ==========================================================
-   PARALLAX
-========================================================== */
-.parallax {
-    position: relative;
-    height: 300px;
-    min-height: auto;
-    background-image: url('assets/banda.jpg');
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    z-index: 1;
-}
-
-.parallax .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.75);
-    z-index: 1;
-}
-
-.parallax .content {
-    position: relative;
-    z-index: 2;
-}
-
-.parallax h2 {
-    font-family: var(--font-title);
-    font-size: 46px;
-    letter-spacing: 3px;
-    margin-bottom: 10px;
-}
-
-.parallax p {
-    font-size: 16px;
-    color: #ccc;
-}
-
-/* ==========================================================
    VIDEOS
 ========================================================== */
 #videos {
@@ -624,36 +578,6 @@ nav ul li a:hover::after {
     width: 100%;
     height: 100%;
     border: none;
-}
-
-/* ==========================================================
-   NUMBERS / COUNTERS
-========================================================== */
-.numbers-section {
-    background: linear-gradient(180deg, #070707 0%, #000 100%);
-    padding: 60px 0;
-    min-height: auto;
-}
-
-.numbers-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-    text-align: center;
-}
-
-.counter h2 {
-    font-family: var(--font-title);
-    font-size: 60px;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-}
-
-.counter p {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: #888;
 }
 
 /* ==========================================================
@@ -683,45 +607,6 @@ nav ul li a:hover::after {
     border-color: var(--primary-color);
     color: var(--primary-color);
     transform: translateY(-2px);
-}
-
-/* ==========================================================
-   REVIEWS (DEPOIMENTOS)
-========================================================== */
-#reviews {
-    background-color: #070707;
-}
-
-.reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-}
-
-.reviews-grid article {
-    background: #0d0d0d;
-    padding: 40px;
-    border-radius: 4px;
-    border-left: 3px solid var(--primary-color);
-}
-
-.reviews-grid article p {
-    font-size: 15px;
-    line-height: 1.7;
-    color: #ccc;
-    font-style: italic;
-    margin-bottom: 25px;
-}
-
-.review-author h4 {
-    font-size: 14px;
-    font-weight: 600;
-    color: #fff;
-}
-
-.review-author span {
-    font-size: 12px;
-    color: #666;
 }
 
 /* ==========================================================
@@ -814,16 +699,17 @@ nav ul li a:hover::after {
 }
 
 /* ==========================================================
-   CONTACT SECTION
+   CONTACT SECTION (Atualizado para Contatos Diretos)
 ========================================================== */
 #contact {
     background-color: #050505;
+    text-align: center;
 }
 
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
+.contact-container-centered {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .contact-info span {
@@ -832,47 +718,80 @@ nav ul li a:hover::after {
     letter-spacing: 3px;
     font-size: 13px;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .contact-info h2 {
     font-family: var(--font-title);
     font-size: 56px;
-    line-height: 1;
-    margin-bottom: 30px;
+    line-height: 1.1;
+    margin-bottom: 25px;
 }
 
 .contact-info p {
-    font-size: 15px;
+    font-size: 16px;
     color: #999;
     line-height: 1.8;
     margin-bottom: 40px;
 }
 
-.contact-details {
+.contact-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
     margin-bottom: 40px;
 }
 
-.contact-item {
-    display: flex;
+.btn-contact {
+    display: inline-flex;
     align-items: center;
-    gap: 20px;
-    margin-bottom: 25px;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 380px;
+    padding: 18px 30px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.4s ease;
 }
 
-.contact-item i {
-    font-size: 20px;
-    color: var(--primary-color);
-}
-
-.contact-item span {
-    font-size: 14px;
+.btn-contact.whatsapp {
+    background-color: #25d366;
     color: #fff;
+    border: 1px solid #25d366;
+}
+
+.btn-contact.whatsapp:hover {
+    background-color: #1ebd58;
+    border-color: #1ebd58;
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+    transform: translateY(-3px);
+}
+
+.btn-contact.phone {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-contact.phone:hover {
+    background-color: #fff;
+    color: #000;
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
 }
 
 .social-links {
     display: flex;
     gap: 20px;
+    justify-content: center;
 }
 
 .social-links a {
@@ -894,52 +813,6 @@ nav ul li a:hover::after {
     color: #000;
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 183, 255, 0.4);
-}
-
-.contact-form form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 16px;
-    background: #0d0d0d;
-    border: 1px solid rgba(255,255,255,0.05);
-    color: #fff;
-    font-family: var(--font-body);
-    font-size: 13px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 10px rgba(0, 183, 255, 0.1);
-}
-
-.contact-form button {
-    padding: 16px;
-    background: var(--primary-color);
-    color: #000;
-    border: none;
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 3px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.4s ease;
-}
-
-.contact-form button:hover {
-    background: #fff;
-    box-shadow: 0 0 20px rgba(0,183,255,0.4);
-    transform: translateY(-2px);
 }
 
 /* ==========================================================
@@ -1138,8 +1011,8 @@ footer ul li a:hover {
 
 @media (max-width: 992px) {
     section { padding: 60px 5% 40px; }
-    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 50px; }
-    .members-grid, .gallery-grid, .press-grid, .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-grid { grid-template-columns: 1fr; gap: 50px; }
+    .members-grid, .gallery-grid, .press-grid { grid-template-columns: repeat(2, 1fr); }
     .footer-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -1163,12 +1036,11 @@ footer ul li a:hover {
     .hero h1 { font-size: 55px; }
     .show { grid-template-columns: 1fr; gap: 15px; text-align: center; }
     .show-cta { text-align: center; }
-    .numbers-grid { grid-template-columns: repeat(2, 1fr); }
     .songs { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 576px) {
-    .members-grid, .gallery-grid, .press-grid, .reviews-grid { grid-template-columns: 1fr; }
+    .members-grid, .gallery-grid, .press-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; }
     .songs { grid-template-columns: 1fr; }
     .hero h1 { font-size: 42px; }
