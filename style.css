@@ -281,7 +281,7 @@ nav ul{
 
 display:flex;
 
-gap:34px;px;
+gap: 34px;
 
 align-items:center;
 
@@ -372,12 +372,30 @@ cursor:pointer;
     font-family: var(--font-title);
     font-size: 95px;
     line-height: 0.9;
-    letter-spacing: 4px;
+    letter-spacing: 6px;
     margin-bottom: 20px;
-    background: linear-gradient(180deg, #fff 0%, #aaa 100%);
+
+    color: #ffffff;
+
+    background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f0f0f0 35%,
+        #a8a8a8 70%,
+        #5d5d5d 100%
+    );
+
+    background-clip: text;
     -webkit-background-clip: text;
+
+    color: transparent;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+
+    text-shadow:
+        0 0 15px rgba(255,255,255,.15),
+        0 0 35px rgba(0,191,255,.15);
+
+    filter: drop-shadow(0 10px 25px rgba(0,0,0,.7));
 }
 
 .hero h2 {
