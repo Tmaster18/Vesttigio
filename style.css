@@ -789,10 +789,11 @@ line-height:1.8;
    SOBRE
 ========================================================== */
 
-#about{
+#members{
+    background: #050505;
 
-background:#090909;
-
+    padding-top: 0;
+    padding-bottom: 80px;
 }
 
 #about .container{
@@ -865,7 +866,7 @@ font-weight:700;
 
 font-family:'Bebas Neue';
 
-font-size:72px;
+font-size:52px;
 
 line-height:1;
 
@@ -885,41 +886,37 @@ color:#c8c8c8;
 
 }
 
-.numbers{
-
-display:flex;
-
-gap:45px;
-
-margin-top:50px;
-
-flex-wrap:wrap;
-
+.numbers {
+    display: flex;
+    justify-content: center;   /* centraliza o conjunto */
+    gap: 60px;                 /* espaço entre cada bloco */
+    margin-top: 50px;
+    flex-wrap: wrap;
+    text-align: center;        /* centraliza texto dentro de cada bloco */
 }
 
-.numbers h3{
-
-font-family:'Bebas Neue';
-
-font-size:60px;
-
-color:var(--blue);
-
-letter-spacing:2px;
-
+.numbers div {
+    display: flex;
+    flex-direction: column;    /* número em cima, palavra embaixo */
+    align-items: center;       /* centraliza horizontalmente */
 }
 
-.numbers p{
-
-margin:0;
-
-font-size:15px;
-
-letter-spacing:3px;
-
-text-transform:uppercase;
-
+.numbers h3 {
+    font-family: 'Bebas Neue';
+    font-size: 60px;
+    color: var(--blue);
+    letter-spacing: 2px;
+    margin-bottom: 8px;        /* espaço entre número e palavra */
 }
+
+.numbers p {
+    margin: 0;
+    font-size: 15px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c8c8c8;
+}
+
 
 
 /* ==========================================================

@@ -1,42 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Vesttigio | Classic Rock Experience</title>
-    <meta content="Vesttigio - Classic Rock Experience. Grandes clássicos do rock executados com energia, qualidade e presença de palco." name="description"/>
-    <meta content="#000000" name="theme-color"/>
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-    <link href="style.css" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"/>
-    <link href="assets/favicon.png" rel="icon" type="image/png"/>
-    <meta content="index,follow" name="robots"/>
-    <meta content="Vesttigio | Classic Rock Experience" property="og:title"/>
-    <meta content="Grandes clássicos do Rock para eventos." property="og:description"/>
-    <meta content="website" property="og:type"/>
-    <meta content="pt_BR" property="og:locale"/>
-    <link as="image" href="assets/logo.png" rel="preload"/>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Vesttigio | Classic Rock Experience</title>
+  <meta content="Vesttigio - Classic Rock Experience. Grandes clássicos do rock executados com energia, qualidade e presença de palco." name="description"/>
+  <meta content="#000000" name="theme-color"/>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"/>
+  <link href="assets/favicon.png" rel="icon" type="image/png"/>
+  <meta content="index,follow" name="robots"/>
+  <meta content="Vesttigio | Classic Rock Experience" property="og:title"/>
+  <meta content="Grandes clássicos do Rock para eventos." property="og:description"/>
+  <meta content="website" property="og:type"/>
+  <meta content="pt_BR" property="og:locale"/>
+  <link as="image" href="assets/logo.png" rel="preload"/>
+  <style>
+    /* Ajuste para compensar a altura do menu fixo */
+    #members {
+      scroll-margin-top: 100px; /* altere conforme a altura do cabeçalho */
+    }
+
+    /* Cabeçalho fixo */
+    #header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+    }
+  </style>
 </head>
+
 <body>
 
 <div id="loader">
-    <div class="loader-logo">VESTTIGIO</div>
+  <div class="loader-logo">VESTTIGIO</div>
 </div>
 
-<header>
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">Sobre</a></li>
-            <li><a href="#members">Integrantes</a></li>
-            <li><a href="#shows">Shows</a></li>
-            <li><a href="#gallery">Galeria</a></li>
-            <li><a href="#contact">Contato</a></li>
-        </ul>
-        <div class="menu-mobile">&#9776;</div>
-    </nav>
+<header id="header">
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">Sobre</a></li>
+      <li><a href="#members">Integrantes</a></li>
+      <li><a href="#shows">Shows</a></li>
+      <li><a href="#gallery">Galeria</a></li>
+      <li><a href="#contact">Contato</a></li>
+    </ul>
+    <div class="menu-mobile">&#9776;</div>
+  </nav>
 </header>
 
 <section id="home">
@@ -68,17 +83,16 @@
             <img alt="Imagem da banda Vesttigio" decoding="async" loading="lazy" src="assets/banda.jpg"/>
         </div>
         <div class="about-text">
-            <span>SOBRE</span>
             <h2>A ENERGIA DO ROCK CLÁSSICO</h2>
-            <p>A Vesttigio leva aos palcos uma experiência inspirada nas maiores bandas do rock mundial, com repertório cuidadosamente selecionado, sonoridade marcante e um espetáculo pensado para envolver o público do início ao fim.</p>
-            <p>Mais do que executar músicas, a banda entrega uma apresentação vibrante, valorizando presença de palco, iluminação, interação com a plateia e qualidade musical.</p>
+            <p>A Vesttigio leva aos palcos uma experiência inspirada nas maiores bandas do rock mundial, com sonoridade marcante e um espetáculo pensado para envolver o público do início ao fim.</p>
+            <p>Com repertório preparado para diferentes tipos de eventos, de pubs e festas a encontros de motos e exposições de carros antigos, cada show é adaptado ao ambiente e ao público presente, garantindo energia, conexão e a vibração única do rock clássico.</p>
             <div class="numbers">
                 <div>
-                    <h3>100+</h3>
+                    <h3>200+</h3>
                     <p>Shows</p>
                 </div>
                 <div>
-                    <h3>20+</h3>
+                    <h3>10+</h3>
                     <p>Anos de Rock</p>
                 </div>
                 <div>
@@ -92,10 +106,6 @@
 
 <section id="members">
     <div class="container">
-        <div class="section-title">
-            <span>A BANDA</span>
-            <h2>INTEGRANTES</h2>
-        </div>
         <div class="members-grid">
             <div class="member">
                 <img alt="Bateria" decoding="async" loading="lazy" src="assets/bateria.jpg"/>
@@ -320,5 +330,6 @@
 </audio>
 
 <script src="script.js"></script>
+
 </body>
 </html>
