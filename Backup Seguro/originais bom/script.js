@@ -1,8 +1,10 @@
 /* ==========================================================
-   VESTTIGIO - SCRIPT.JS (AJUSTADO PARA MOBILE MENU)
+   VESTTIGIO - SCRIPT.JS
 ========================================================== */
 
-/* LOADER */
+/* ==========================================================
+   LOADER
+========================================================== */
 window.addEventListener("load", () => {
     const loader = document.getElementById("loader");
     setTimeout(() => {
@@ -12,11 +14,12 @@ window.addEventListener("load", () => {
     }, 1200);
 });
 
-/* HEADER SCROLL */
+/* ==========================================================
+   HEADER SCROLL
+========================================================== */
 const header = document.getElementById("header");
 
 window.addEventListener("scroll", () => {
-    if (!header) return;
     if (window.scrollY > 80) {
         header.classList.add("scrolled");
     } else {
@@ -24,55 +27,45 @@ window.addEventListener("scroll", () => {
     }
 });
 
-/* MENU SCROLL AJUSTE (links de âncora) */
+/* ==========================================================
+   MENU SCROLL AJUSTE
+========================================================== */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
-    // se o link for apenas "#" ou vazio, ignora
-    const href = this.getAttribute('href');
-    if (!href || href === '#') return;
-
-    const target = document.querySelector(href);
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
     if (!target) return;
 
-    e.preventDefault();
-
     // pega a altura real do cabeçalho fixo
-    const headerEl = document.getElementById("header");
-    const headerOffset = headerEl ? headerEl.offsetHeight : 0;
+    const header = document.getElementById("header");
+    const headerOffset = header ? header.offsetHeight : 0;
 
     const elementPosition = target.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - headerOffset - 10; // pequeno ajuste
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
     window.scrollTo({
       top: offsetPosition,
       behavior: "smooth"
     });
-
-    // se menu mobile estiver aberto, fecha-o
-    const nav = document.querySelector("nav ul");
-    if (nav && nav.classList.contains("active")) {
-      nav.classList.remove("active");
-      document.body.classList.remove("menu-open");
-    }
   });
 });
 
-/* MENU MOBILE */
+/* ==========================================================
+   MENU MOBILE
+========================================================== */
 const menuMobile = document.querySelector(".menu-mobile");
 const nav = document.querySelector("nav ul");
 
-if (menuMobile && nav) {
-  menuMobile.addEventListener("click", () => {
-      nav.classList.toggle("active");
-      document.body.classList.toggle("menu-open"); // bloqueia rolagem de fundo quando menu aberto
-  });
-}
+menuMobile.addEventListener("click", () => {
+    nav.classList.toggle("active");
+});
 
-/* BACK TO TOP */
+/* ==========================================================
+   BACK TO TOP
+========================================================== */
 const backTop = document.getElementById("backTop");
 
 window.addEventListener("scroll", () => {
-    if (!backTop) return;
     if (window.scrollY > 400) {
         backTop.classList.add("active");
     } else {
@@ -80,17 +73,19 @@ window.addEventListener("scroll", () => {
     }
 });
 
-if (backTop) {
-  backTop.addEventListener("click", () => {
-      window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-      });
-  });
-}
+backTop.addEventListener("click", () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
 
-/* SCROLL REVEAL SIMPLES */
-const revealElements = document.querySelectorAll(".member, .show, .gallery-item, .press-card");
+/* ==========================================================
+   SCROLL REVEAL SIMPLES
+========================================================== */
+const revealElements = document.querySelectorAll(
+    ".member, .show, .gallery-item, .press-card"
+);
 
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -108,14 +103,13 @@ revealElements.forEach(el => {
     revealObserver.observe(el);
 });
 
-/* HEADER MOBILE FIX - fechar menu ao clicar em link */
+/* ==========================================================
+   HEADER MOBILE FIX
+========================================================== */
 const navLinks = document.querySelectorAll("nav ul li a");
 
 navLinks.forEach(link => {
     link.addEventListener("click", () => {
-        if (nav) {
-            nav.classList.remove("active");
-            document.body.classList.remove("menu-open");
-        }
+        nav.classList.remove("active");
     });
 });
