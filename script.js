@@ -128,7 +128,7 @@ if (backTop) {
    SCROLL REVEAL SIMPLES
 ========================================================== */
 const revealElements = document.querySelectorAll(
-    ".member, .show, .gallery-item, .press-card"
+    ".member, .show, .gallery-item, .press-card, section"
 );
 
 if (revealElements.length > 0) {
@@ -143,6 +143,9 @@ if (revealElements.length > 0) {
     }, { threshold: 0.1 });
 
     revealElements.forEach(el => {
+        if (el.tagName === 'SECTION') {
+            el.classList.add('section-ready');
+        }
         el.style.opacity = "0";
         el.style.transform = "translateY(40px)";
         revealObserver.observe(el);
