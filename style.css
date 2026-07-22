@@ -115,6 +115,9 @@ section.section-ready {
 
 --blue2:#007cff;
 
+--primary-color:#00b7ff;
+--font-title:'Bebas Neue', sans-serif;
+
 --shadow:0 20px 60px rgba(0,0,0,.45);
 
 --transition:.35s;
@@ -248,36 +251,78 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: 60px;
+    height: 72px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     padding: 0 5%;
     z-index: 999;
     transition: background-color .3s ease, height .3s ease, box-shadow .3s ease;
-    background: rgba(0,0,0,.15);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255,255,255,.05);
+    background: rgba(2, 2, 2, 0.35);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
 header.scrolled {
-    height: 50px; /* altura menor quando rola */
-    background: #050505;
-    box-shadow: 0 10px 40px rgba(0,0,0,.5);
+    height: 62px;
+    background: rgba(5,5,5,.95);
+    box-shadow: 0 10px 40px rgba(0,0,0,.45);
+}
+
+.brand-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-title);
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: #fff;
+    transition: transform .3s ease, color .3s ease;
+}
+
+.brand-mark:hover,
+.brand-mark:focus-visible {
+    color: var(--blue);
+    transform: translateY(-1px);
+}
+
+.brand-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.18);
+    background: linear-gradient(135deg, rgba(0,183,255,.25), rgba(0,183,255,.05));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.15);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.brand-text {
+    text-shadow: 0 0 20px rgba(0,183,255,.2);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
 }
 
 nav ul {
     display: flex;
-    gap: 28px;
+    gap: 24px;
     align-items: center;
 }
 
 nav a {
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 2px;
-    font-weight: 600;
+    font-weight: 700;
+    text-transform: uppercase;
     position: relative;
     transition: .3s;
+    padding: 8px 0;
 }
 
 nav a::after {
@@ -287,15 +332,17 @@ nav a::after {
     bottom: -6px;
     width: 0;
     height: 2px;
-    background: var(--blue);
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
     transition: .35s;
 }
 
-nav a:hover {
-    color: var(--blue);
+nav a:hover,
+nav a:focus-visible {
+    color: #fff;
 }
 
-nav a:hover::after {
+nav a:hover::after,
+nav a:focus-visible::after {
     width: 100%;
 }
 
@@ -527,17 +574,17 @@ flex-wrap:wrap;
 
 .btn{
 
-padding:18px 42px;
+padding:16px 34px;
 
-min-height:54px;
+min-height:52px;
 
-min-width:180px;
+min-width:176px;
 
-border:2px solid var(--blue);
+border:1px solid transparent;
 
-border-radius:50px;
+border-radius:999px;
 
-font-size:14px;
+font-size:13px;
 
 font-weight:700;
 
@@ -545,32 +592,38 @@ letter-spacing:3px;
 
 transition:.35s;
 
-background:var(--blue);
+background:linear-gradient(135deg, var(--blue), #2f7cff);
 
 color:#fff;
 
-box-shadow:0 0 30px rgba(0,183,255,.35);
+box-shadow:0 12px 35px rgba(0,183,255,.24);
 
 }
 
 .btn:hover,
 .btn:focus-visible{
 
-transform:translateY(-5px);
+transform:translateY(-4px);
 
-box-shadow:0 15px 45px rgba(0,183,255,.55);
+box-shadow:0 18px 45px rgba(0,183,255,.42);
 
 }
 
 .btn.outline{
 
-background:transparent;
+background:rgba(255,255,255,.06);
+
+border-color:rgba(255,255,255,.16);
+
+backdrop-filter:blur(10px);
 
 }
 
 .btn.outline:hover{
 
-background:var(--blue);
+background:linear-gradient(135deg, var(--blue), #2f7cff);
+
+border-color:transparent;
 
 }
 
@@ -796,7 +849,7 @@ animation:scrollWheel 2s infinite;
 
 text-align:center;
 
-margin-bottom:80px;
+margin-bottom:76px;
 
 }
 
@@ -804,25 +857,28 @@ margin-bottom:80px;
 
 display:inline-block;
 
-font-size:15px;
+font-size:14px;
 
 letter-spacing:8px;
 
 color:var(--blue);
 
-margin-bottom:15px;
+margin-bottom:12px;
 
 font-weight:700;
 
+text-transform:uppercase;
+
 }
 
+.section-title h1,
 .section-title h2{
 
-font-family:'Bebas Neue';
+font-family:var(--font-title);
 
-font-size:70px;
+font-size:clamp(34px, 4.8vw, 58px);
 
-letter-spacing:5px;
+letter-spacing:4px;
 
 margin-bottom:18px;
 
@@ -830,8 +886,13 @@ position:relative;
 
 display:inline-block;
 
+text-transform:uppercase;
+
+text-shadow:0 0 20px rgba(0,183,255,.12);
+
 }
 
+.section-title h1::after,
 .section-title h2::after{
     content:"";
     position:absolute;
