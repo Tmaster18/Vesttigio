@@ -152,12 +152,16 @@ if (revealElements.length > 0) {
 /* ==========================================================
    HEADER MOBILE FIX
 ========================================================== */
-const navLinks = document.querySelectorAll("nav ul li a");
+const navLinks = document.querySelectorAll("nav a");
 
 navLinks.forEach(link => {
     link.addEventListener("click", () => {
-        if (nav) {
+        if (nav && window.innerWidth <= 768) {
             nav.classList.remove("active");
+            if (menuMobile) {
+                menuMobile.setAttribute("aria-expanded", "false");
+                document.body.classList.remove("menu-open");
+            }
         }
     });
 });
