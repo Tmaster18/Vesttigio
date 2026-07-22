@@ -37,6 +37,20 @@ a{
     color:inherit;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible{
+    outline:2px solid var(--blue);
+    outline-offset:4px;
+    box-shadow:0 0 0 4px rgba(0,183,255,.20);
+}
+
+button,
+a{
+    -webkit-tap-highlight-color:transparent;
+}
+
 ul{
     list-style:none;
 }
@@ -56,6 +70,16 @@ section{
     opacity: 1;
     transform: translateY(0);
     transition: opacity .6s ease, transform .6s ease;
+}
+
+section:hover {
+    transform: translateY(-1px);
+}
+
+@media (min-width: 1200px) {
+    section {
+        padding: 90px 8%;
+    }
 }
 
 section.section-ready {
@@ -505,6 +529,10 @@ flex-wrap:wrap;
 
 padding:18px 42px;
 
+min-height:54px;
+
+min-width:180px;
+
 border:2px solid var(--blue);
 
 border-radius:50px;
@@ -525,7 +553,8 @@ box-shadow:0 0 30px rgba(0,183,255,.35);
 
 }
 
-.btn:hover{
+.btn:hover,
+.btn:focus-visible{
 
 transform:translateY(-5px);
 
@@ -1779,9 +1808,12 @@ transition:.35s;
 
 }
 
-.press-card a:hover{
+.press-card a:hover,
+.press-card a:focus-visible{
 
 background:var(--blue);
+
+transform:translateY(-2px);
 
 }
 
@@ -2018,7 +2050,8 @@ footer ul li:hover{
     border:1px solid rgba(255,255,255,.2);
 }
 
-#backTop:hover{
+#backTop:hover,
+#backTop:focus-visible{
     transform:translateY(-3px) scale(1.03);
     box-shadow:0 14px 30px rgba(0,183,255,.32);
 }
@@ -2350,6 +2383,7 @@ footer ul li:hover{
     .section-title h2{
         font-size:44px;
         letter-spacing:3px;
+        text-shadow:0 2px 12px rgba(0,0,0,.4);
     }
 
     .section-title p{
@@ -2923,12 +2957,13 @@ footer ul li:hover{
         padding: 10px 16px;
         border: 1px solid rgba(255,255,255,.35);
         border-radius: 999px;
-        background: linear-gradient(135deg, rgba(0,183,255,.22), rgba(255,255,255,.08));
+        background: linear-gradient(135deg, rgba(0,183,255,.28), rgba(255,255,255,.10));
         color: #fff;
         font-weight: 700;
         letter-spacing: 1.5px;
         text-transform: uppercase;
         box-shadow: 0 6px 18px rgba(0,0,0,.25);
+        min-height: 44px;
     }
 
     .menu-mobile::before {
@@ -2965,7 +3000,16 @@ footer ul li:hover{
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.25) 45%, rgba(0,0,0,.55) 100%);
+        background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.25) 45%, rgba(0,0,0,.58) 100%);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    #home::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top center, rgba(0,183,255,.12), transparent 55%);
         z-index: 1;
         pointer-events: none;
     }
@@ -2977,8 +3021,8 @@ footer ul li:hover{
         margin: 0 auto 6px;
         text-align: center;
         width: 100%;
-        text-shadow: 0 2px 18px rgba(0,0,0,0.65);
-        color: #f8f8f8;
+        text-shadow: 0 2px 26px rgba(0,0,0,0.9);
+        color: #ffffff;
     }
 
     .hero h2 {
@@ -2986,8 +3030,8 @@ footer ul li:hover{
         letter-spacing: 4px;
         margin: 0 auto 4px;
         text-align: center;
-        text-shadow: 0 2px 14px rgba(0,0,0,0.55);
-        color: #f5f5f5;
+        text-shadow: 0 2px 18px rgba(0,0,0,0.7);
+        color: #ffffff;
     }
 
     .hero h3 {
@@ -2995,7 +3039,7 @@ footer ul li:hover{
         letter-spacing: 2px;
         margin: 0 auto 4px;
         text-align: center;
-        text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+        text-shadow: 0 2px 16px rgba(0,0,0,0.6);
         color: #f5f5f5;
     }
 
@@ -3004,7 +3048,7 @@ footer ul li:hover{
         max-width: 100%;
         margin: 14px auto 24px;
         text-align: center;
-        color: #ececec;
+        color: #f5f5f5;
         line-height: 1.6;
     }
 
