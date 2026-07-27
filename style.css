@@ -3169,7 +3169,9 @@ footer ul li:hover{
     }
 
     .scroll {
-        display: none;
+        display: flex;
+        opacity: 0.8;
+        animation: scrollPulse 2s infinite;
     }
 
     .about-image {
@@ -3192,7 +3194,7 @@ footer ul li:hover{
     }
 
     .about-highlights {
-        display: flex;
+        display: none;
         flex-wrap: wrap;
         gap: 10px;
         margin: 18px 0 20px;
@@ -3227,6 +3229,12 @@ footer ul li:hover{
     .member img {
         height: auto;
         max-height: 320px;
+        object-fit: cover;
+        object-position: center top;
+    }
+    
+    .member:nth-child(2) img {
+        object-position: center 20%;
     }
 
     .member h3 {
@@ -3354,8 +3362,8 @@ footer ul li:hover{
     }
 
     .video-card iframe {
-        display: none;
-        height: 240px;
+        display: block;
+        height: 280px;
     }
 
     .songs {
