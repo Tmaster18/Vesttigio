@@ -2847,6 +2847,33 @@ footer ul li:hover{
 
 }
 
+/* ===== Ajustes para TVs grandes (ex: 55'') ===== */
+@media screen and (min-width: 1400px) {
+  /* Desativar fumaça e luzes */
+  .smoke, .lights {
+    display: none !important;
+  }
+
+  /* Simplificar transições */
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Reduzir sombras pesadas */
+  .member, .show, .gallery-item, .video-card, .press-card, .counter {
+    box-shadow: none !important;
+    filter: none !important;
+  }
+
+  /* Botão voltar ao topo mais leve */
+  #backTop {
+    box-shadow: none !important;
+    transform: none !important;
+  }
+}
+
+
 /* ==========================================================
    ANIMAÇÕES - COMPLETO
 ========================================================== */

@@ -168,3 +168,12 @@ navLinks.forEach(link => {
         }
     });
 });
+
+// Ajustes para TVs grandes
+if (window.innerWidth >= 1400) {
+    const particles = document.getElementById("particles");
+    if (particles) particles.style.display = "none";
+
+    const hoverSound = document.getElementById("hoverSound");
+    if (hoverSound) hoverSound.remove();
+}
