@@ -177,3 +177,12 @@ if (window.innerWidth >= 1400) {
     const hoverSound = document.getElementById("hoverSound");
     if (hoverSound) hoverSound.remove();
 }
+window.addEventListener("load", () => {
+  if (window.innerWidth >= 1200) {
+    const particles = document.getElementById("particles");
+    if (particles) particles.style.display = "none";
+
+    const hoverSound = document.getElementById("hoverSound");
+    if (hoverSound) hoverSound.remove();
+  }
+});
