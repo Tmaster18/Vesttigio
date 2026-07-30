@@ -2172,7 +2172,12 @@ footer ul li:hover{
         font-size:72px;
         letter-spacing:4px;
     }
+    .video-card iframe{
+    height:280px;
 }
+}
+
+
 
 @media (max-width:480px){
     .hero h1{
