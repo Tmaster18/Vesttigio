@@ -2909,20 +2909,6 @@ footer ul li:hover{
     50%{opacity:1;}
 }
 
-@keyframes lightLeft{
-    0%,100%{transform:rotate(-10deg);}
-    50%{transform:rotate(-25deg);}
-}
-
-@keyframes lightCenter{
-    0%,100%{transform:rotate(0deg);}
-    50%{transform:rotate(15deg);}
-}
-
-@keyframes lightRight{
-    0%,100%{transform:rotate(10deg);}
-    50%{transform:rotate(25deg);}
-}
 
 @keyframes rotateLight{
     from{transform:rotate(0deg);}
