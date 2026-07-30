@@ -1963,6 +1963,12 @@ transform:translateY(-2px);
     font-size: 20px;
     color: #fff;
 }
+
+.contact-item a[href*="wa.me"] {
+    color: #25D366;
+    text-decoration: none;
+    font-weight: 700;
+}
 /* ==========================================================
    INSTAGRAM
 ========================================================== */
