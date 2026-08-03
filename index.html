@@ -226,34 +226,32 @@
             <h1>DOWNLOADS DE MATERIAIS</h1>
             <p>Materiais profissionais para divulgação, contratação e apresentação da banda.</p>
         </div>
-        <div class="press-grid">
-            <div class="press-card">
-                <i class="fas fa-file-pdf"></i>
-                <h3>Rider Técnico</h3>
-                <p>Especificações e mapa de palco.</p>
-                <a href="assets/downloads/rider.pdf" download>Baixar</a>
-            </div>
-            <div class="press-card">
-                <i class="fas fa-file-pdf"></i>
-                <h3>Release</h3>
-                <p>Histórico e proposta da banda.</p>
-                <a href="assets/downloads/release.pdf" download>Baixar</a>
-            </div>
-            <div class="press-card">
-                <i class="fas fa-images"></i>
-                <h3>Fotos Oficiais</h3>
-                <p>Material de divulgação em alta.</p>
-                <a href="assets/downloads/banner.png" download>Baixar</a>
-            </div>
-            <div class="press-card">
-                <i class="fas fa-compact-disc"></i>
-                <h3>Logotipos</h3>
-                <p>Arquivos em vetor e PNG.</p>
-                <a href="assets/downloads/logo.jpg" download>Baixar</a>
-                <a href="assets/downloads/semfundo.png" download>Baixar</a>
+        <div class="downloads-catalog">
+            <div class="download-categories" aria-label="Categorias de downloads"></div>
+            <div class="download-panel">
+                <div class="download-panel-header">
+                    <div>
+                        <span class="download-current-label">Selecione uma categoria</span>
+                        <p class="download-current-description">Clique em uma categoria para ver os arquivos disponíveis.</p>
+                    </div>
+                    <button type="button" class="download-back" hidden>Ver todas as categorias</button>
+                </div>
+                <div class="download-items-grid" id="downloadItems"></div>
             </div>
         </div>
-    </div>
+        <div id="downloadPreviewModal" class="download-preview-modal" aria-hidden="true">
+            <div class="download-preview-content" role="dialog" aria-modal="true" aria-labelledby="downloadPreviewTitle">
+                <button type="button" class="download-preview-close" aria-label="Fechar pré-visualização">×</button>
+                <div class="download-preview-body">
+                    <div class="download-preview-media" id="downloadPreviewMedia"></div>
+                    <div class="download-preview-info">
+                        <h3 id="downloadPreviewTitle"></h3>
+                        <p id="downloadPreviewText"></p>
+                        <a id="downloadPreviewDownload" class="btn outline" href="#" download>Download</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 </section>
 
 <section id="contact">
