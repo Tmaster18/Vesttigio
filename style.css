@@ -477,56 +477,6 @@ width:100%;
 /* ==========================================================
    SISTEMA DE LUZES DE PALCO (.lights)
 ========================================================== */
-.lights {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.light {
-    position: absolute;
-    top: -50px;
-    width: 150px;
-    height: 150%;
-    background: radial-gradient(ellipse at top, rgba(0, 183, 255, 0.15) 0%, rgba(0, 183, 255, 0) 70%);
-    transform-origin: top center;
-    mix-blend-mode: screen;
-}
-
-.light.one {
-    left: 20%;
-    transform: rotate(-15deg);
-    animation: lightLeft 10s infinite ease-in-out;
-}
-
-.light.two {
-    left: 50%;
-    transform: translateX(-50%);
-    animation: lightCenter 12s infinite ease-in-out;
-}
-
-.light.three {
-    right: 20%;
-    transform: rotate(15deg);
-    animation: lightRight 10s infinite ease-in-out;
-}
-
-@keyframes lightLeft {
-    0%, 100% { transform: rotate(-10deg); }
-    50% { transform: rotate(-25deg); }
-}
-@keyframes lightCenter {
-    0%, 100% { transform: translateX(-50%) rotate(0deg); }
-    50% { transform: translateX(-50%) rotate(15deg); }
-}
-@keyframes lightRight {
-    0%, 100% { transform: rotate(10deg); }
-    50% { transform: rotate(25deg); }
-}
 /* ==========================================================
    BOTÕES
 ========================================================== */
@@ -2346,23 +2296,6 @@ footer ul li:hover{
     }
 
 }
-
-/* ===== Ajustes para TVs grandes ===== */
-@media screen and (min-width: 1200px) {
-  .smoke, .lights,  {
-    display: none !important;
-  }
-  * {
-    transition: none !important;
-    animation: none !important;
-  }
-  .member, .show, .gallery-item, .video-card, .press-card, .counter {
-    box-shadow: none !important;
-    filter: none !important;
-  }
-
-}
-
 
   /* Botão voltar ao topo mais leve */
   #backTop {
