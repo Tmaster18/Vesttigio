@@ -190,224 +190,199 @@ window.addEventListener("load", () => {
 /* ==========================================================
    DOWNLOADS CATALOG
 ========================================================= */
-const downloadData = [
-    {
-        id: 'logotipos',
-        label: 'Logotipos',
-        description: 'Identidade visual e versões do logo.',
-        items: [
+const downloadCatalog = {
+    'rider-tecnico': {
+        label: 'Rider Técnico',
+        description: 'Especificações e mapa de palco.',
+        files: [
             {
-                id: 'logo-vesttigio-principal',
-                title: 'Logo Vesttigio – versão principal',
-                description: 'Arquivo JPG em alta resolução.',
-                file: 'assets/downloads/logo.jpg',
-                type: 'image',
-                format: 'JPG',
-                preview: 'assets/downloads/logo.jpg'
-            },
-            {
-                id: 'logo-fundo-transparente',
-                title: 'Logo Vesttigio – fundo transparente',
-                description: 'Arquivo PNG com fundo transparente.',
-                file: 'assets/downloads/semfundo.png',
-                type: 'image',
-                format: 'PNG',
-                preview: 'assets/downloads/semfundo.png'
-            }
-        ]
-    },
-    {
-        id: 'downloads',
-        label: 'Downloads',
-        description: 'Arquivos diversos para download.',
-        items: [
-            {
-                id: 'rider-tecnico',
                 title: 'Rider Técnico',
                 description: 'Especificações e mapa de palco.',
                 file: 'assets/downloads/rider.pdf',
-                type: 'pdf',
-                format: 'PDF'
-            },
+                format: 'PDF',
+                type: 'pdf'
+            }
+        ]
+    },
+    'release': {
+        label: 'Release',
+        description: 'Histórico e proposta da banda.',
+        files: [
             {
-                id: 'release',
                 title: 'Release',
                 description: 'Histórico e proposta da banda.',
                 file: 'assets/downloads/release.pdf',
-                type: 'pdf',
-                format: 'PDF'
-            },
+                format: 'PDF',
+                type: 'pdf'
+            }
+        ]
+    },
+    'fotos-oficiais': {
+        label: 'Fotos Oficiais',
+        description: 'Material de divulgação em alta.',
+        files: [
             {
-                id: 'fotos-oficiais',
                 title: 'Fotos Oficiais',
                 description: 'Material de divulgação em alta.',
                 file: 'assets/downloads/banner.png',
-                type: 'image',
                 format: 'PNG',
+                type: 'image',
                 preview: 'assets/downloads/banner.png'
             }
         ]
+    },
+    'logotipos': {
+        label: 'Logotipos',
+        description: 'Arquivos em vetor e PNG.',
+        files: [
+            {
+                title: 'Logo Vesttigio – versão principal',
+                description: 'Arquivo JPG em alta resolução.',
+                file: 'assets/downloads/logo.jpg',
+                format: 'JPG',
+                type: 'image',
+                preview: 'assets/downloads/logo.jpg'
+            },
+            {
+                title: 'Logo Vesttigio – fundo transparente',
+                description: 'Arquivo PNG com fundo transparente.',
+                file: 'assets/downloads/semfundo.png',
+                format: 'PNG',
+                type: 'image',
+                preview: 'assets/downloads/semfundo.png'
+            }
+        ]
     }
-];
-
-const categoriesContainer = document.querySelector('.download-categories');
-const itemsContainer = document.getElementById('downloadItems');
-const currentLabel = document.querySelector('.download-current-label');
-const currentDescription = document.querySelector('.download-current-description');
-const backButton = document.querySelector('.download-back');
-const previewModal = document.getElementById('downloadPreviewModal');
-const previewMedia = document.getElementById('downloadPreviewMedia');
-const previewTitle = document.getElementById('downloadPreviewTitle');
-const previewText = document.getElementById('downloadPreviewText');
-const previewDownload = document.getElementById('downloadPreviewDownload');
-const previewClose = document.querySelector('.download-preview-close');
-
-let activeCategory = null;
-
-const fileIconMap = {
-    image: 'fas fa-image',
-    pdf: 'fas fa-file-pdf',
-    other: 'fas fa-file'
 };
 
-const renderCategories = () => {
-    categoriesContainer.innerHTML = '';
-    downloadData.forEach(category => {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'download-category';
-        button.innerHTML = `<span>${category.label}</span><small>${category.items.length} arquivo${category.items.length === 1 ? '' : 's'}</small>`;
-        button.addEventListener('click', () => selectCategory(category.id));
-        categoriesContainer.appendChild(button);
-    });
-};
-
-const renderItems = (category) => {
-    itemsContainer.innerHTML = '';
-    currentLabel.textContent = category.label;
-    currentDescription.textContent = category.description;
-    backButton.hidden = false;
-
-    category.items.forEach(item => {
-        const card = document.createElement('article');
-        card.className = 'download-card';
-
-        const preview = document.createElement('div');
-        preview.className = 'download-card-preview';
-
-        const iconClass = fileIconMap[item.type] || fileIconMap.other;
-        if (item.type === 'image' && item.preview) {
-            const img = document.createElement('img');
-            img.src = item.preview;
-            img.alt = item.title;
-            preview.appendChild(img);
-        } else if (item.type === 'pdf') {
-            const icon = document.createElement('i');
-            icon.className = `${iconClass} download-card-icon`;
-            preview.appendChild(icon);
-        } else {
-            const icon = document.createElement('i');
-            icon.className = `${iconClass} download-card-icon`;
-            preview.appendChild(icon);
-        }
-
-        const content = document.createElement('div');
-        content.className = 'download-card-content';
-        content.innerHTML = `
-            <div class="download-card-meta">
-                <h4>${item.title}</h4>
-                <span>${item.format}</span>
+const downloadModalBackdrop = document.createElement('div');
+downloadModalBackdrop.className = 'download-modal-backdrop';
+downloadModalBackdrop.innerHTML = `
+    <div class="download-modal" role="dialog" aria-modal="true" aria-labelledby="downloadModalTitle">
+        <div class="download-modal-header">
+            <div>
+                <h2 id="downloadModalTitle"></h2>
+                <p id="downloadModalDescription"></p>
             </div>
-            <p class="download-card-description">${item.description}</p>
-        `;
+            <button type="button" class="download-modal-close" aria-label="Fechar painel de downloads">×</button>
+        </div>
+        <div class="download-modal-list" id="downloadModalList"></div>
+        <div class="download-modal-preview" id="downloadModalPreview" hidden>
+            <h3 id="downloadModalPreviewTitle"></h3>
+            <div class="download-modal-preview-content" id="downloadModalPreviewContent"></div>
+            <a id="downloadModalPreviewDownload" class="btn outline" href="#" download>Download</a>
+        </div>
+    </div>
+`;
+document.body.appendChild(downloadModalBackdrop);
 
-        const actions = document.createElement('div');
-        actions.className = 'download-card-actions';
+const downloadModalClose = downloadModalBackdrop.querySelector('.download-modal-close');
+const downloadModalList = downloadModalBackdrop.querySelector('#downloadModalList');
+const downloadModalTitle = downloadModalBackdrop.querySelector('#downloadModalTitle');
+const downloadModalDescription = downloadModalBackdrop.querySelector('#downloadModalDescription');
+const downloadModalPreview = downloadModalBackdrop.querySelector('#downloadModalPreview');
+const downloadModalPreviewTitle = downloadModalBackdrop.querySelector('#downloadModalPreviewTitle');
+const downloadModalPreviewContent = downloadModalBackdrop.querySelector('#downloadModalPreviewContent');
+const downloadModalPreviewDownload = downloadModalBackdrop.querySelector('#downloadModalPreviewDownload');
 
-        const viewButton = document.createElement('button');
-        viewButton.type = 'button';
-        viewButton.textContent = 'Visualizar';
-        viewButton.addEventListener('click', () => openPreview(item));
-
-        const downloadLink = document.createElement('a');
-        downloadLink.href = item.file;
-        downloadLink.download = '';
-        downloadLink.textContent = 'Download';
-
-        actions.appendChild(viewButton);
-        actions.appendChild(downloadLink);
-        content.appendChild(actions);
-
-        card.appendChild(preview);
-        card.appendChild(content);
-        itemsContainer.appendChild(card);
-    });
-};
-
-const selectCategory = (categoryId) => {
-    const category = downloadData.find(item => item.id === categoryId);
+const openDownloadModal = (categoryKey) => {
+    const category = downloadCatalog[categoryKey];
     if (!category) return;
 
-    activeCategory = category;
-    document.querySelectorAll('.download-category').forEach(button => {
-        button.classList.toggle('active', button.textContent.includes(category.label));
-    });
-    renderItems(category);
+    downloadModalTitle.textContent = category.label;
+    downloadModalDescription.textContent = category.description;
+    downloadModalPreview.hidden = true;
+    downloadModalPreviewContent.innerHTML = '';
+
+    downloadModalList.innerHTML = category.files.map((file, index) => `
+        <div class="download-modal-item" data-file-index="${index}">
+            <div class="download-modal-item-header">
+                <div>
+                    <p class="download-modal-item-title">${file.title}</p>
+                    <p class="download-modal-item-format">${file.format}</p>
+                </div>
+                <div class="download-modal-item-actions">
+                    <button type="button" class="download-modal-view">Visualizar</button>
+                    <a href="${file.file}" download>Download</a>
+                </div>
+            </div>
+            <p class="download-modal-item-description">${file.description}</p>
+        </div>
+    `).join('');
+
+    downloadModalBackdrop.classList.add('active');
 };
 
-const openPreview = (item) => {
-    previewMedia.innerHTML = '';
-    previewTitle.textContent = item.title;
-    previewText.textContent = item.description;
-    previewDownload.href = item.file;
-    previewDownload.download = '';
+const closeDownloadModal = () => {
+    downloadModalBackdrop.classList.remove('active');
+    downloadModalPreview.hidden = true;
+    downloadModalPreviewContent.innerHTML = '';
+};
 
-    if (item.type === 'image' && item.preview) {
+const renderDownloadPreview = (file) => {
+    downloadModalPreviewTitle.textContent = file.title;
+    downloadModalPreviewDownload.href = file.file;
+
+    downloadModalPreviewContent.innerHTML = '';
+    if (file.type === 'image' && file.preview) {
         const img = document.createElement('img');
-        img.src = item.preview;
-        img.alt = item.title;
-        previewMedia.appendChild(img);
-    } else if (item.type === 'pdf') {
+        img.src = file.preview;
+        img.alt = file.title;
+        downloadModalPreviewContent.appendChild(img);
+    } else if (file.type === 'pdf') {
         const iframe = document.createElement('iframe');
-        iframe.src = item.file;
-        iframe.title = item.title;
-        previewMedia.appendChild(iframe);
+        iframe.src = file.file;
+        iframe.title = file.title;
+        downloadModalPreviewContent.appendChild(iframe);
     } else {
-        const info = document.createElement('div');
-        info.className = 'download-card-icon';
-        info.textContent = `${item.format} não possui pré-visualização direta.`;
-        previewMedia.appendChild(info);
+        const notice = document.createElement('div');
+        notice.className = 'download-modal-preview-notice';
+        notice.textContent = `${file.format} não possui pré-visualização direta.`;
+        downloadModalPreviewContent.appendChild(notice);
     }
-
-    previewModal.classList.add('active');
-    previewModal.setAttribute('aria-hidden', 'false');
+    downloadModalPreview.hidden = false;
 };
 
-const closePreview = () => {
-    previewModal.classList.remove('active');
-    previewModal.setAttribute('aria-hidden', 'true');
-    previewMedia.innerHTML = '';
-};
-
-if (categoriesContainer && itemsContainer) {
-    renderCategories();
-}
-
-backButton.addEventListener('click', () => {
-    activeCategory = null;
-    currentLabel.textContent = 'Selecione uma categoria';
-    currentDescription.textContent = 'Clique em uma categoria para ver os arquivos disponíveis.';
-    backButton.hidden = true;
-    itemsContainer.innerHTML = '';
-    document.querySelectorAll('.download-category').forEach(btn => btn.classList.remove('active'));
+downloadModalBackdrop.addEventListener('click', (event) => {
+    if (event.target === downloadModalBackdrop) {
+        closeDownloadModal();
+    }
 });
 
-previewClose.addEventListener('click', closePreview);
-previewModal.addEventListener('click', (event) => {
-    if (event.target === previewModal) closePreview();
-});
+downloadModalClose.addEventListener('click', closeDownloadModal);
+
 document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && previewModal.classList.contains('active')) {
-        closePreview();
+    if (event.key === 'Escape' && downloadModalBackdrop.classList.contains('active')) {
+        closeDownloadModal();
     }
 });
+
+const downloadCards = document.querySelectorAll('.press-card');
+
+downloadCards.forEach(card => {
+    card.addEventListener('click', (event) => {
+        if (event.target.closest('a')) return;
+        const category = card.getAttribute('data-download-category');
+        if (!category) return;
+        openDownloadModal(category);
+    });
+});
+
+const delegateViewClick = (event) => {
+    const viewButton = event.target.closest('.download-modal-view');
+    if (!viewButton) return;
+
+    const item = viewButton.closest('.download-modal-item');
+    if (!item) return;
+
+    const categoryKey = downloadModalTitle.textContent.toLowerCase().replace(/ /g, '-');
+    const category = Object.values(downloadCatalog).find(cat => cat.label === downloadModalTitle.textContent);
+    if (!category) return;
+
+    const fileIndex = Number(item.dataset.fileIndex);
+    const file = category.files[fileIndex];
+    if (!file) return;
+    renderDownloadPreview(file);
+};
+
+downloadModalList.addEventListener('click', delegateViewClick);
