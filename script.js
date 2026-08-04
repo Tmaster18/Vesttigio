@@ -190,17 +190,46 @@ window.addEventListener("load", () => {
 /* ==========================================================
    DOWNLOADS CATALOG
 ========================================================= */
+const getFileNameFromPath = (path) => path.split('/').pop();
+
 const downloadCatalog = {
     'rider-tecnico': {
         label: 'Rider Técnico',
         description: 'Especificações e mapa de palco.',
         files: [
             {
-                title: 'Rider Técnico',
+                title: 'Rider Técnico (PDF)',
                 description: 'Especificações e mapa de palco.',
                 file: 'assets/downloads/rider.pdf',
                 format: 'PDF',
-                type: 'pdf'
+                type: 'pdf',
+                fileName: getFileNameFromPath('assets/downloads/rider.pdf')
+            },
+            {
+                title: 'Rider Técnico (ZIP)',
+                description: 'Pacote com rider e materiais extras.',
+                file: 'assets/downloads/rider.zip',
+                format: 'ZIP',
+                type: 'zip',
+                fileName: getFileNameFromPath('assets/downloads/rider.zip')
+            },
+            {
+                title: 'Mapa de Palco (JPG)',
+                description: 'Mapa de palco em alta resolução.',
+                file: 'assets/downloads/Mapa.jpg',
+                format: 'JPG',
+                type: 'image',
+                preview: 'assets/downloads/Mapa.jpg',
+                fileName: getFileNameFromPath('assets/downloads/Mapa.jpg')
+            },
+            {
+                title: 'Mapa de Palco (PNG)',
+                description: 'Mapa de palco em alta resolução.',
+                file: 'assets/downloads/mapa.png',
+                format: 'PNG',
+                type: 'image',
+                preview: 'assets/downloads/mapa.png',
+                fileName: getFileNameFromPath('assets/downloads/mapa.png')
             }
         ]
     },
@@ -213,7 +242,8 @@ const downloadCatalog = {
                 description: 'Histórico e proposta da banda.',
                 file: 'assets/downloads/release.pdf',
                 format: 'PDF',
-                type: 'pdf'
+                type: 'pdf',
+                fileName: getFileNameFromPath('assets/downloads/release.pdf')
             }
         ]
     },
@@ -222,12 +252,13 @@ const downloadCatalog = {
         description: 'Material de divulgação em alta.',
         files: [
             {
-                title: 'Fotos Oficiais',
-                description: 'Material de divulgação em alta.',
+                title: 'Banner de Divulgação',
+                description: 'Imagem para material promocional.',
                 file: 'assets/downloads/banner.png',
                 format: 'PNG',
                 type: 'image',
-                preview: 'assets/downloads/banner.png'
+                preview: 'assets/downloads/banner.png',
+                fileName: getFileNameFromPath('assets/downloads/banner.png')
             }
         ]
     },
@@ -241,7 +272,8 @@ const downloadCatalog = {
                 file: 'assets/downloads/logo.jpg',
                 format: 'JPG',
                 type: 'image',
-                preview: 'assets/downloads/logo.jpg'
+                preview: 'assets/downloads/logo.jpg',
+                fileName: getFileNameFromPath('assets/downloads/logo.jpg')
             },
             {
                 title: 'Logo Vesttigio – fundo transparente',
@@ -249,7 +281,8 @@ const downloadCatalog = {
                 file: 'assets/downloads/semfundo.png',
                 format: 'PNG',
                 type: 'image',
-                preview: 'assets/downloads/semfundo.png'
+                preview: 'assets/downloads/semfundo.png',
+                fileName: getFileNameFromPath('assets/downloads/semfundo.png')
             }
         ]
     }
@@ -285,30 +318,37 @@ const downloadModalPreviewTitle = downloadModalBackdrop.querySelector('#download
 const downloadModalPreviewContent = downloadModalBackdrop.querySelector('#downloadModalPreviewContent');
 const downloadModalPreviewDownload = downloadModalBackdrop.querySelector('#downloadModalPreviewDownload');
 
+let activeDownloadCategoryKey = null;
+
 const openDownloadModal = (categoryKey) => {
     const category = downloadCatalog[categoryKey];
     if (!category) return;
 
+    activeDownloadCategoryKey = categoryKey;
     downloadModalTitle.textContent = category.label;
     downloadModalDescription.textContent = category.description;
     downloadModalPreview.hidden = true;
     downloadModalPreviewContent.innerHTML = '';
 
-    downloadModalList.innerHTML = category.files.map((file, index) => `
+    downloadModalList.innerHTML = category.files.map((file, index) => {
+        const canPreview = ['pdf', 'image'].includes(file.type);
+        return `
         <div class="download-modal-item" data-file-index="${index}">
             <div class="download-modal-item-header">
                 <div>
                     <p class="download-modal-item-title">${file.title}</p>
+                    <p class="download-modal-item-filename">${file.fileName}</p>
                     <p class="download-modal-item-format">${file.format}</p>
                 </div>
                 <div class="download-modal-item-actions">
-                    <button type="button" class="download-modal-view">Visualizar</button>
-                    <a href="${file.file}" download>Download</a>
+                    ${canPreview ? `<button type="button" class="download-modal-view">Visualizar</button>` : ''}
+                    <a href="${file.file}" download="${file.fileName}">Baixar</a>
                 </div>
             </div>
             <p class="download-modal-item-description">${file.description}</p>
         </div>
-    `).join('');
+    `;
+    }).join('');
 
     downloadModalBackdrop.classList.add('active');
 };
@@ -357,17 +397,6 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-const downloadCards = document.querySelectorAll('.press-card');
-
-downloadCards.forEach(card => {
-    card.addEventListener('click', (event) => {
-        if (event.target.closest('a')) return;
-        const category = card.getAttribute('data-download-category');
-        if (!category) return;
-        openDownloadModal(category);
-    });
-});
-
 const delegateViewClick = (event) => {
     const viewButton = event.target.closest('.download-modal-view');
     if (!viewButton) return;
@@ -375,8 +404,8 @@ const delegateViewClick = (event) => {
     const item = viewButton.closest('.download-modal-item');
     if (!item) return;
 
-    const categoryKey = downloadModalTitle.textContent.toLowerCase().replace(/ /g, '-');
-    const category = Object.values(downloadCatalog).find(cat => cat.label === downloadModalTitle.textContent);
+    if (!activeDownloadCategoryKey) return;
+    const category = downloadCatalog[activeDownloadCategoryKey];
     if (!category) return;
 
     const fileIndex = Number(item.dataset.fileIndex);
@@ -384,5 +413,20 @@ const delegateViewClick = (event) => {
     if (!file) return;
     renderDownloadPreview(file);
 };
+
+const downloadCardLinks = document.querySelectorAll('.press-card a');
+
+downloadCardLinks.forEach(link => {
+    link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const card = link.closest('.press-card');
+        if (!card) return;
+
+        const category = card.getAttribute('data-category');
+        if (!category) return;
+
+        openDownloadModal(category);
+    });
+});
 
 downloadModalList.addEventListener('click', delegateViewClick);
