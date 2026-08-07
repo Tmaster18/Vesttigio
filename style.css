@@ -20,11 +20,12 @@ html{
 }
 
 body{
-    font-family:'Montserrat',sans-serif;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     background:#050505;
     color:#fff;
     overflow-x:hidden;
     line-height:1.6;
+    text-rendering: optimizeLegibility;
 }
 
 img{
@@ -202,7 +203,7 @@ z-index:99999;
 
 font-size:65px;
 
-font-family:'Bebas Neue',sans-serif;
+font-family:'Bebas Neue', Arial, sans-serif;
 
 letter-spacing:12px;
 
@@ -407,6 +408,9 @@ width:100%;
     text-align: center;
     /* Aqui aplicamos a imagem de fundo com uma máscara escura para dar contraste ao texto */
     background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85)), url('assets/hero.jpg');
+    background-color: #050505;
+    background-size: cover;
+    background-position: center;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
