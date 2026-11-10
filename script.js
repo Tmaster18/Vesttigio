@@ -1,191 +1,170 @@
 /* ==========================================================
    VESTTIGIO - SCRIPT.JS
+   Inicialização defensiva e compatível com navegadores atuais.
 ========================================================== */
 
-/* ==========================================================
-   LOADER
-========================================================== */
-window.addEventListener("load", () => {
-    const loader = document.getElementById("loader");
-
-    if (!loader) return;
-
-    setTimeout(() => {
+/* LOADER: nunca deve impedir o acesso ao conteúdo. */
+(() => {
+    const hideLoader = () => {
+        const loader = document.getElementById("loader");
+        if (!loader || loader.classList.contains("is-hidden")) return;
+        loader.style.transition = "opacity 0.6s ease";
         loader.style.opacity = "0";
         loader.style.pointerEvents = "none";
-        loader.style.transition = "1s";
-    }, 1200);
-});
-
-/* ==========================================================
-   HEADER SCROLL
-========================================================== */
-const header = document.getElementById("header");
-
-if (header) {
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 80) {
-            header.classList.add("scrolled");
-        } else {
-            header.classList.remove("scrolled");
-        }
-    });
-}
-
-/* ==========================================================
-   MENU SCROLL AJUSTE
-========================================================== */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-
-        if (!href || href === "#") return;
-
-        const target = document.querySelector(href);
-        if (!target) return;
-
-        e.preventDefault();
-
-        const headerOffset = header ? header.offsetHeight : 0;
-        const elementPosition = target.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-        });
-    });
-});
-
-/* ==========================================================
-   MENU MOBILE
-========================================================== */
-const menuMobile = document.querySelector(".menu-mobile");
-const nav = document.getElementById("primary-navigation") || document.querySelector("nav ul");
-
-if (menuMobile && nav) {
-    const toggleMenu = () => {
-        const isOpen = nav.classList.toggle("active");
-        menuMobile.setAttribute("aria-expanded", String(isOpen));
-        document.body.classList.toggle("menu-open", isOpen);
+        window.setTimeout(() => {
+            loader.classList.add("is-hidden");
+            loader.setAttribute("aria-hidden", "true");
+        }, 650);
     };
 
-    menuMobile.addEventListener("click", (event) => {
+    if (document.readyState === "complete") {
+        window.setTimeout(hideLoader, 350);
+    } else {
+        window.addEventListener("load", () => window.setTimeout(hideLoader, 350), { once: true });
+        // Fallback: mesmo que algum recurso externo não termine de carregar.
+        window.setTimeout(hideLoader, 5000);
+    }
+
+    // Atualiza a situação dos shows automaticamente conforme a data local.
+    document.querySelectorAll('.show[data-date]').forEach(show => {
+        const parts = (show.dataset.date || '').split('-').map(Number);
+        if (parts.length !== 3 || parts.some(Number.isNaN)) return;
+
+        const eventDate = new Date(parts[0], parts[1] - 1, parts[2]);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        eventDate.setHours(0, 0, 0, 0);
+
+        const upcoming = eventDate >= today;
+        const status = show.querySelector('.show-status');
+        if (!status) return;
+
+        show.classList.toggle('is-upcoming', upcoming);
+        show.classList.toggle('is-past', !upcoming);
+        status.textContent = upcoming ? 'PRÓXIMO SHOW' : 'JÁ REALIZADO';
+        status.setAttribute('aria-label', upcoming ? 'Próximo show' : 'Show já realizado');
+    });
+
+})();
+
+const header = document.getElementById("header");
+const menuMobile = document.querySelector(".menu-mobile");
+const nav = document.getElementById("primary-navigation") || document.querySelector("nav ul");
+const backTop = document.getElementById("backTop");
+
+/* Atualiza os elementos dependentes da rolagem em um único listener. */
+let scrollFramePending = false;
+const updateScrollUI = () => {
+    if (header) header.classList.toggle("scrolled", window.scrollY > 80);
+    if (backTop) backTop.classList.toggle("active", window.scrollY > 400);
+    scrollFramePending = false;
+};
+window.addEventListener("scroll", () => {
+    if (!scrollFramePending) {
+        scrollFramePending = true;
+        window.requestAnimationFrame(updateScrollUI);
+    }
+}, { passive: true });
+updateScrollUI();
+
+/* Rolagem suave para âncoras válidas. */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", event => {
+        const href = anchor.getAttribute("href");
+        if (!href || href === "#") return;
+        let target;
+        try { target = document.querySelector(href); } catch (_) { return; }
+        if (!target) return;
+        event.preventDefault();
+        const offset = header ? header.offsetHeight : 0;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+        closeMenu();
+    });
+});
+
+/* Menu mobile com estado acessível e fechamento centralizado. */
+const closeMenu = () => {
+    if (nav) nav.classList.remove("active");
+    if (menuMobile) {
+        menuMobile.setAttribute("aria-expanded", "false");
+        menuMobile.setAttribute("aria-label", "Abrir menu");
+    }
+    document.body.classList.remove("menu-open");
+};
+
+if (menuMobile && nav) {
+    menuMobile.addEventListener("click", event => {
         event.stopPropagation();
-        toggleMenu();
-    });
-
-    document.addEventListener("click", (event) => {
-        const clickedInsideMenu = nav.contains(event.target) || menuMobile.contains(event.target);
-
-        if (!clickedInsideMenu && nav.classList.contains("active")) {
-            nav.classList.remove("active");
-            menuMobile.setAttribute("aria-expanded", "false");
-            document.body.classList.remove("menu-open");
+        const willOpen = !nav.classList.contains("active");
+        nav.classList.toggle("active", willOpen);
+        menuMobile.setAttribute("aria-expanded", String(willOpen));
+        menuMobile.setAttribute("aria-label", willOpen ? "Fechar menu" : "Abrir menu");
+        document.body.classList.toggle("menu-open", willOpen);
+        if (willOpen) {
+            const firstLink = nav.querySelector("a[href]");
+            if (firstLink) window.setTimeout(() => firstLink.focus(), 0);
         }
     });
-
-    document.addEventListener("keydown", (event) => {
+    document.addEventListener("click", event => {
+        if (nav.classList.contains("active") && !nav.contains(event.target) && !menuMobile.contains(event.target)) closeMenu();
+    });
+    document.addEventListener("keydown", event => {
         if (event.key === "Escape" && nav.classList.contains("active")) {
-            nav.classList.remove("active");
-            menuMobile.setAttribute("aria-expanded", "false");
-            document.body.classList.remove("menu-open");
+            closeMenu();
+            menuMobile.focus();
         }
     });
-
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) closeMenu();
+    }, { passive: true });
     window.addEventListener("scroll", () => {
-        if (nav.classList.contains("active")) {
-            nav.classList.remove("active");
-            menuMobile.setAttribute("aria-expanded", "false");
-            document.body.classList.remove("menu-open");
-        }
+        if (nav.classList.contains("active")) closeMenu();
     }, { passive: true });
 }
 
-/* ==========================================================
-   BACK TO TOP
-========================================================== */
-const backTop = document.getElementById("backTop");
-
 if (backTop) {
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 400) {
-            backTop.classList.add("active");
-        } else {
-            backTop.classList.remove("active");
-        }
-    });
-
     backTop.addEventListener("click", () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+        window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
     });
 }
 
-/* ==========================================================
-   SCROLL REVEAL SIMPLES
-========================================================== */
-const revealElements = document.querySelectorAll(
-    ".member, .show, .gallery-item, .press-card, section"
-);
-
-if (revealElements.length > 0) {
-    const revealObserver = new IntersectionObserver((entries) => {
+/* Reveal progressivo; sem IntersectionObserver, o conteúdo continua visível. */
+const revealElements = document.querySelectorAll(".member, .show, .gallery-item, .press-card, section");
+if (revealElements.length && "IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
-                entry.target.style.transition = "0.8s ease";
-            }
+            if (!entry.isIntersecting) return;
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+            entry.target.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+            revealObserver.unobserve(entry.target);
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08, rootMargin: "0px 0px 40px 0px" });
 
-    revealElements.forEach(el => {
-        if (el.tagName === 'SECTION') {
-            el.classList.add('section-ready');
-        }
-        el.style.opacity = "0";
-        el.style.transform = "translateY(40px)";
-        revealObserver.observe(el);
+    revealElements.forEach(element => {
+        element.style.opacity = "0";
+        element.style.transform = "translateY(40px)";
+        revealObserver.observe(element);
+    });
+} else {
+    revealElements.forEach(element => {
+        element.style.opacity = "1";
+        element.style.transform = "none";
     });
 }
 
-/* ==========================================================
-   HEADER MOBILE FIX
-========================================================== */
-const navLinks = document.querySelectorAll("nav a");
-
-navLinks.forEach(link => {
-    link.addEventListener("click", () => {
-        if (nav && window.innerWidth <= 768) {
-            nav.classList.remove("active");
-            if (menuMobile) {
-                menuMobile.setAttribute("aria-expanded", "false");
-                document.body.classList.remove("menu-open");
-            }
-        }
-    });
-});
-
-// Ajustes para TVs grandes
-if (window.innerWidth >= 1400) {
-    const particles = document.getElementById("particles");
-    if (particles) particles.style.display = "none";
-
-    const hoverSound = document.getElementById("hoverSound");
-    if (hoverSound) hoverSound.remove();
-}
-window.addEventListener("load", () => {
-  if (window.innerWidth >= 1200) {
-    const particles = document.getElementById("particles");
-    if (particles) particles.style.display = "none";
-
-    const hoverSound = document.getElementById("hoverSound");
-    if (hoverSound) hoverSound.remove();
-  }
-});
+/* Ajustes opcionais para telas grandes. */
+const applyLargeScreenAdjustments = () => {
+    if (window.innerWidth >= 1200) {
+        const particles = document.getElementById("particles");
+        if (particles) particles.style.display = "none";
+        const hoverSound = document.getElementById("hoverSound");
+        if (hoverSound) hoverSound.remove();
+    }
+};
+applyLargeScreenAdjustments();
+window.addEventListener("resize", applyLargeScreenAdjustments, { passive: true });
 
 /* ==========================================================
    DOWNLOADS CATALOG
@@ -319,12 +298,14 @@ const downloadModalPreviewContent = downloadModalBackdrop.querySelector('#downlo
 const downloadModalPreviewDownload = downloadModalBackdrop.querySelector('#downloadModalPreviewDownload');
 
 let activeDownloadCategoryKey = null;
+let previousModalFocus = null;
 
 const openDownloadModal = (categoryKey) => {
     const category = downloadCatalog[categoryKey];
     if (!category) return;
 
     activeDownloadCategoryKey = categoryKey;
+    previousModalFocus = document.activeElement;
     downloadModalTitle.textContent = category.label;
     downloadModalDescription.textContent = category.description;
     downloadModalPreview.hidden = true;
@@ -351,10 +332,15 @@ const openDownloadModal = (categoryKey) => {
     }).join('');
 
     downloadModalBackdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    downloadModalClose.focus();
 };
 
 const closeDownloadModal = () => {
     downloadModalBackdrop.classList.remove('active');
+    document.body.style.overflow = '';
+    if (previousModalFocus && typeof previousModalFocus.focus === 'function') previousModalFocus.focus();
+    previousModalFocus = null;
     downloadModalPreview.hidden = true;
     downloadModalPreviewContent.innerHTML = '';
 };
@@ -398,7 +384,9 @@ document.addEventListener('keydown', (event) => {
 });
 
 const delegateViewClick = (event) => {
-    const viewButton = event.target.closest('.download-modal-view');
+    const origin = event.target instanceof Element ? event.target : event.target.parentElement;
+    if (!origin) return;
+    const viewButton = origin.closest('.download-modal-view');
     if (!viewButton) return;
 
     const item = viewButton.closest('.download-modal-item');
@@ -430,3 +418,100 @@ downloadCardLinks.forEach(link => {
 });
 
 downloadModalList.addEventListener('click', delegateViewClick);
+
+
+/* ==========================================================
+   PREVIA ETAPA 2 — GALERIA AMPLIADA E VIDEOS SOB DEMANDA
+========================================================== */
+(() => {
+    const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+    if (galleryItems.length) {
+        const lightbox = document.createElement('div');
+        lightbox.className = 'gallery-lightbox';
+        lightbox.setAttribute('role', 'dialog');
+        lightbox.setAttribute('aria-modal', 'true');
+        lightbox.setAttribute('aria-label', 'Fotografia ampliada');
+        lightbox.innerHTML = `
+            <button class="gallery-lightbox-close" type="button" aria-label="Fechar fotografia">&times;</button>
+            <img alt="" src="">
+            <p class="gallery-lightbox-caption"></p>
+        `;
+        document.body.appendChild(lightbox);
+        const image = lightbox.querySelector('img');
+        const caption = lightbox.querySelector('.gallery-lightbox-caption');
+        const closeButton = lightbox.querySelector('.gallery-lightbox-close');
+        let previousFocus = null;
+
+        const open = (item) => {
+            const thumb = item.querySelector('img');
+            if (!thumb) return;
+            previousFocus = item;
+            image.src = thumb.currentSrc || thumb.src;
+            image.alt = thumb.alt || 'Fotografia da banda Vesttigio';
+            caption.textContent = thumb.alt || '';
+            lightbox.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+            closeButton.focus();
+        };
+        const close = () => {
+            lightbox.classList.remove('is-open');
+            document.body.style.overflow = '';
+            image.removeAttribute('src');
+            if (previousFocus && previousFocus.focus) previousFocus.focus();
+            previousFocus = null;
+        };
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => open(item));
+            item.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    open(item);
+                }
+            });
+        });
+        closeButton.addEventListener('click', close);
+        lightbox.addEventListener('click', event => { if (event.target === lightbox) close(); });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && lightbox.classList.contains('is-open')) close();
+        });
+    }
+
+    document.querySelectorAll('.video-card[data-video-id]').forEach(card => {
+        const playButton = card.querySelector('.video-preview');
+        if (!playButton) return;
+        playButton.addEventListener('click', () => {
+            const videoId = card.dataset.videoId;
+            if (!/^[\w-]{11}$/.test(videoId || '')) return;
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+            iframe.title = 'Vídeo da banda Vesttigio no YouTube';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.allowFullscreen = true;
+            iframe.loading = 'lazy';
+            playButton.replaceWith(iframe);
+            const caption = card.querySelector('.video-caption');
+            if (caption) caption.textContent = 'Reprodução do vídeo';
+        }, { once: true });
+    });
+
+    // Atualiza a situação dos shows automaticamente conforme a data local.
+    document.querySelectorAll('.show[data-date]').forEach(show => {
+        const parts = (show.dataset.date || '').split('-').map(Number);
+        if (parts.length !== 3 || parts.some(Number.isNaN)) return;
+
+        const eventDate = new Date(parts[0], parts[1] - 1, parts[2]);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        eventDate.setHours(0, 0, 0, 0);
+
+        const upcoming = eventDate >= today;
+        const status = show.querySelector('.show-status');
+        if (!status) return;
+
+        show.classList.toggle('is-upcoming', upcoming);
+        show.classList.toggle('is-past', !upcoming);
+        status.textContent = upcoming ? 'PRÓXIMO SHOW' : 'JÁ REALIZADO';
+        status.setAttribute('aria-label', upcoming ? 'Próximo show' : 'Show já realizado');
+    });
+
+})();

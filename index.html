@@ -9,16 +9,32 @@
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
   <link rel="preload" href="assets/hero.jpg" as="image" fetchpriority="high"/>
-  <link rel="preload" href="style.css" as="style" onload="this.rel='stylesheet'; this.onload=null;"/>
+  <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400;700&amp;family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"/>
   <link href="assets/hero.jpg" rel="icon" type="image/jpeg"/>
-  <meta content="index,follow" name="robots"/>
+  <meta content="index,follow,max-image-preview:large" name="robots"/>
+  <link rel="canonical" href="https://tmaster18.github.io/Vesttigio/"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Vesttigio | Classic Rock Experience"/>
+  <meta name="twitter:description" content="Grandes clássicos do Rock para eventos."/>
+  <meta name="twitter:image" content="https://tmaster18.github.io/Vesttigio/assets/hero.jpg"/>
+  <meta property="og:url" content="https://tmaster18.github.io/Vesttigio/"/>
   <meta content="Vesttigio | Classic Rock Experience" property="og:title"/>
   <meta content="Grandes clássicos do Rock para eventos." property="og:description"/>
   <meta content="website" property="og:type"/>
   <meta content="pt_BR" property="og:locale"/>
   <meta content="https://tmaster18.github.io/Vesttigio/assets/hero.jpg" property="og:image"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "Vesttigio Classic Rock",
+    "url": "https://tmaster18.github.io/Vesttigio/",
+    "genre": ["Classic Rock", "Blues Rock"],
+    "description": "Grandes clássicos do Rock executados com energia, qualidade e presença de palco."
+  }
+  </script>
 </head>
 
 <body>
@@ -54,13 +70,19 @@
         <div class="light three"></div>
     </div>
     <div class="hero">
+        <p class="hero-kicker">CARAZINHO • RS <span aria-hidden="true">|</span> CLASSIC ROCK &amp; BLUES ROCK</p>
         <h2>THE ULTIMATE</h2>
         <h1>VESTTIGIO</h1>
         <h3>CLASSIC ROCK EXPERIENCE</h3>
-        <p>Uma experiência única de Classic Rock e Blues Rock, que atravessa gerações e estilos.</p>
+        <p class="hero-description">Clássicos nacionais e internacionais do rock, em apresentações ao vivo com energia, personalidade e presença de palco.</p>
         <div class="buttons">
-            <a class="btn" href="#shows">AGENDA</a>
-            <a class="btn outline" href="#contact">CONTRATE</a>
+            <a class="btn" href="#shows">VER AGENDA</a>
+            <a class="btn outline" href="#contact">SOLICITAR ORÇAMENTO</a>
+        </div>
+        <div class="hero-signature" aria-label="Repertório ao vivo para eventos">
+            <span>CLÁSSICOS QUE MARCARAM GERAÇÕES</span>
+            <span class="hero-signature-divider" aria-hidden="true"></span>
+            <span>SHOWS AO VIVO</span>
         </div>
     </div>
     <div class="scroll">
@@ -119,36 +141,64 @@
 
 <section id="shows">
     <div class="section-title">
-        <h1>PRÓXIMOS SHOWS</h1>
+        <h1>AGENDA DE SHOWS</h1>
     </div>
     <div class="timeline">
-        <div class="show">
-            <div class="date">08 AGO</div>
+<div class="show" data-date="2026-11-14">
+            <div class="date"><span>14</span><small>NOV</small></div>
             <div class="info">
-                <h3>Nosé Veículos</h3>
-                <p>Não Me Toque • RS</p>
+                <h3>Evento do 592</h3>
+                <p><i class="fas fa-location-dot" aria-hidden="true"></i> Carazinho • RS</p>
             </div>
+            <span class="show-status" aria-live="polite"></span>
         </div>
-        <div class="show">
-            <div class="date">30 AGO</div>
+<div class="show" data-date="2026-11-21">
+            <div class="date"><span>21</span><small>NOV</small></div>
             <div class="info">
-                <h3>Encontro de Carros "Pinga Óleo"</h3>
-                <p>Carazinho • RS</p>
+                <h3>Encontro de Carros Antigos</h3>
+                <p><i class="fas fa-location-dot" aria-hidden="true"></i> Soledade • RS</p>
             </div>
+            <span class="show-status" aria-live="polite"></span>
         </div>
-        <div class="show">
-            <div class="date">12 SET</div>
+<div class="show" data-date="2026-11-28">
+            <div class="date"><span>28</span><small>NOV</small></div>
             <div class="info">
-                <h3>Moto Grupo Papaxão</h3>
-                <p>Carazinho • RS</p>
+                <h3>Evento de Motos</h3>
+                <p><i class="fas fa-location-dot" aria-hidden="true"></i> Carazinho • RS</p>
             </div>
+            <span class="show-status" aria-live="polite"></span>
         </div>
-      <div class="show">
-            <div class="date">26 SET</div>
+<div class="show" data-date="2026-09-26">
+            <div class="date"><span>26</span><small>SET</small></div>
             <div class="info">
                 <h3>Evento</h3>
-                <p>Carazinho • RS</p>
+                <p><i class="fas fa-location-dot" aria-hidden="true"></i> Carazinho • RS</p>
             </div>
+            <span class="show-status" aria-live="polite"></span>
+        </div>
+<div class="show" data-date="2026-09-12">
+            <div class="date"><span>12</span><small>SET</small></div>
+            <div class="info">
+                <h3>Moto Grupo Papaxão</h3>
+                <p><i class="fas fa-location-dot" aria-hidden="true"></i> Carazinho • RS</p>
+            </div>
+            <span class="show-status" aria-live="polite"></span>
+        </div>
+<div class="show" data-date="2026-08-30">
+            <div class="date"><span>30</span><small>AGO</small></div>
+            <div class="info">
+                <h3>Encontro de Carros "Pinga Óleo"</h3>
+                <p><i class="fas fa-location-dot" aria-hidden="true"></i> Carazinho • RS</p>
+            </div>
+            <span class="show-status" aria-live="polite"></span>
+        </div>
+<div class="show" data-date="2026-08-08">
+            <div class="date"><span>08</span><small>AGO</small></div>
+            <div class="info">
+                <h3>Nosé Veículos</h3>
+                <p><i class="fas fa-location-dot" aria-hidden="true"></i> Não Me Toque • RS</p>
+            </div>
+            <span class="show-status" aria-live="polite"></span>
         </div>
     </div>
 </section>
@@ -161,24 +211,29 @@
 
         <div class="gallery-grid">
 
-            <figure class="gallery-item">
-                <img src="assets/palco1.jpg" loading="lazy" alt="Momento no palco da banda">
+            <figure class="gallery-item" tabindex="0" role="button" aria-label="Ampliar fotografia: Momento no palco da banda">
+                <img src="assets/palco1.jpg" loading="lazy" decoding="async" alt="Momento no palco da banda">
+                <span class="gallery-zoom" aria-hidden="true"><i class="fas fa-expand"></i></span>
             </figure>
 
-            <figure class="gallery-item">
-                <img src="assets/palco2.jpg" loading="lazy" alt="Performance da banda em show">
+            <figure class="gallery-item" tabindex="0" role="button" aria-label="Ampliar fotografia: Performance da banda em show">
+                <img src="assets/palco2.jpg" loading="lazy" decoding="async" alt="Performance da banda em show">
+                <span class="gallery-zoom" aria-hidden="true"><i class="fas fa-expand"></i></span>
             </figure>
 
-            <figure class="gallery-item">
-                <img src="assets/palco3.jpg" loading="lazy" alt="Cena do palco com público">
+            <figure class="gallery-item" tabindex="0" role="button" aria-label="Ampliar fotografia: Cena do palco com público">
+                <img src="assets/palco3.jpg" loading="lazy" decoding="async" alt="Cena do palco com público">
+                <span class="gallery-zoom" aria-hidden="true"><i class="fas fa-expand"></i></span>
             </figure>
 
-            <figure class="gallery-item">
-                <img src="assets/palco4.jpg" loading="lazy" alt="Detalhe do show">
+            <figure class="gallery-item" tabindex="0" role="button" aria-label="Ampliar fotografia: Detalhe do show">
+                <img src="assets/palco4.jpg" loading="lazy" decoding="async" alt="Detalhe do show">
+                <span class="gallery-zoom" aria-hidden="true"><i class="fas fa-expand"></i></span>
             </figure>
 
-            <figure class="gallery-item">
-                <img src="assets/palco5.jpg" loading="lazy" alt="Apresentação ao vivo">
+            <figure class="gallery-item" tabindex="0" role="button" aria-label="Ampliar fotografia: Apresentação ao vivo">
+                <img src="assets/palco5.jpg" loading="lazy" decoding="async" alt="Apresentação ao vivo">
+                <span class="gallery-zoom" aria-hidden="true"><i class="fas fa-expand"></i></span>
             </figure>
 
         </div>
@@ -192,37 +247,31 @@
 
     <div class="video-grid">
 
-        <div class="video-card">
-            <iframe
-                src="https://www.youtube.com/embed/4fak46Nyy2A"
-                title="YouTube"
-                allowfullscreen
-                loading="lazy">
-            </iframe>
+        <div class="video-card" data-video-id="4fak46Nyy2A">
+            <button class="video-preview" type="button" aria-label="Reproduzir vídeo 1 da Vesttigio">
+                <img src="https://img.youtube.com/vi/4fak46Nyy2A/hqdefault.jpg" alt="Miniatura do vídeo 1 da banda Vesttigio" loading="lazy" decoding="async">
+                <span class="video-play" aria-hidden="true"><i class="fas fa-play"></i></span>
+            </button>
+            <p class="video-caption">Vesttigio Classic Rock — apresentação ao vivo</p>
         </div>
 
-        <div class="video-card">
-            <iframe
-                src="https://www.youtube.com/embed/rljy5CAB14Q"
-                title="YouTube"
-                allowfullscreen
-                loading="lazy">
-            </iframe>
+        <div class="video-card" data-video-id="rljy5CAB14Q">
+            <button class="video-preview" type="button" aria-label="Reproduzir vídeo 2 da Vesttigio">
+                <img src="https://img.youtube.com/vi/rljy5CAB14Q/hqdefault.jpg" alt="Miniatura do vídeo 2 da banda Vesttigio" loading="lazy" decoding="async">
+                <span class="video-play" aria-hidden="true"><i class="fas fa-play"></i></span>
+            </button>
+            <p class="video-caption">Vesttigio Classic Rock — apresentação ao vivo</p>
         </div>
 
-        <div class="video-card">
-            <iframe
-                src="https://www.youtube.com/embed/oWymrOIexQc"
-                title="YouTube"
-                allowfullscreen
-                loading="lazy">
-            </iframe>
+        <div class="video-card" data-video-id="oWymrOIexQc">
+            <button class="video-preview" type="button" aria-label="Reproduzir vídeo 3 da Vesttigio">
+                <img src="https://img.youtube.com/vi/oWymrOIexQc/hqdefault.jpg" alt="Miniatura do vídeo 3 da banda Vesttigio" loading="lazy" decoding="async">
+                <span class="video-play" aria-hidden="true"><i class="fas fa-play"></i></span>
+            </button>
+            <p class="video-caption">Vesttigio Classic Rock — apresentação ao vivo</p>
         </div>
 
     </div>
-</section>
-
-    
 </section>
 
 <section id="setlist">
@@ -288,12 +337,15 @@
             <h2>LEVE A VESTTIGIO PARA O SEU EVENTO</h2>
             <p>Entre em contato diretamente para consultar datas disponíveis, orçamentos e informações gerais da banda.</p>
             
+            <a class="contact-cta" href="https://wa.me/555499816504" target="_blank" rel="noopener noreferrer" aria-label="Conversar com a Vesttigio pelo WhatsApp">
+                <i class="fab fa-whatsapp" aria-hidden="true"></i> CONSULTAR DISPONIBILIDADE
+            </a>
             <div class="contact-methods">
                 <div class="contact-item">
                     <i class="fab fa-whatsapp"></i>
                     <div>
                         <span>WhatsApp</span>
-                        <a href="https://wa.me/555499816504" target="_blank"><strong>(54) 9981-6504</strong></a>
+                        <a href="https://wa.me/555499816504" target="_blank" rel="noopener noreferrer"><strong>(54) 9981-6504</strong></a>
                     </div>
                 </div>
                 <div class="contact-item">
@@ -316,7 +368,7 @@
     </div>
 </footer>
 
-<button id="backTop" aria-label="Voltar ao topo">
+<button id="backTop" type="button" aria-label="Voltar ao topo">
     <i class="fas fa-angle-up"></i>
 </button>
 
