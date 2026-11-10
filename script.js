@@ -24,27 +24,6 @@
         // Fallback: mesmo que algum recurso externo não termine de carregar.
         window.setTimeout(hideLoader, 5000);
     }
-
-    // Atualiza a situação dos shows automaticamente conforme a data local.
-    document.querySelectorAll('.show[data-date]').forEach(show => {
-        const parts = (show.dataset.date || '').split('-').map(Number);
-        if (parts.length !== 3 || parts.some(Number.isNaN)) return;
-
-        const eventDate = new Date(parts[0], parts[1] - 1, parts[2]);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        eventDate.setHours(0, 0, 0, 0);
-
-        const upcoming = eventDate >= today;
-        const status = show.querySelector('.show-status');
-        if (!status) return;
-
-        show.classList.toggle('is-upcoming', upcoming);
-        show.classList.toggle('is-past', !upcoming);
-        status.textContent = upcoming ? 'PRÓXIMO SHOW' : 'JÁ REALIZADO';
-        status.setAttribute('aria-label', upcoming ? 'Próximo show' : 'Show já realizado');
-    });
-
 })();
 
 const header = document.getElementById("header");
@@ -129,8 +108,60 @@ if (backTop) {
     });
 }
 
+
+/* Agenda: separa próximos shows e eventos realizados automaticamente. */
+const showsTimeline = document.querySelector("#shows .timeline");
+if (showsTimeline) {
+    const showCards = Array.from(showsTimeline.querySelectorAll(".show[data-date]"));
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const upcomingShows = [];
+    const completedShows = [];
+
+    showCards.forEach(card => {
+        const [year, month, day] = (card.dataset.date || "").split("-").map(Number);
+        if (!year || !month || !day) return;
+
+        const eventDate = new Date(year, month - 1, day);
+        eventDate.setHours(0, 0, 0, 0);
+        const isUpcoming = eventDate >= today;
+        const status = card.querySelector(".show-status");
+
+        card.classList.toggle("is-upcoming", isUpcoming);
+        card.classList.toggle("is-past", !isUpcoming);
+        if (status) {
+            status.textContent = isUpcoming ? "PRÓXIMO SHOW" : "JÁ REALIZADO";
+            status.setAttribute("aria-label", isUpcoming ? "Próximo show" : "Show já realizado");
+        }
+        (isUpcoming ? upcomingShows : completedShows).push({ card, eventDate });
+    });
+
+    upcomingShows.sort((a, b) => a.eventDate - b.eventDate);
+    completedShows.sort((a, b) => b.eventDate - a.eventDate);
+
+    const createShowGroup = (id, title, entries) => {
+        if (!entries.length) return null;
+        const group = document.createElement("div");
+        group.className = "shows-group";
+        group.id = id;
+        const heading = document.createElement("h2");
+        heading.className = "shows-group-title";
+        heading.textContent = title;
+        group.appendChild(heading);
+        entries.forEach(entry => group.appendChild(entry.card));
+        return group;
+    };
+
+    const upcomingGroup = createShowGroup("upcoming-shows", "PRÓXIMOS SHOWS", upcomingShows);
+    const completedGroup = createShowGroup("completed-shows", "SHOWS REALIZADOS", completedShows);
+    showsTimeline.replaceChildren();
+    if (upcomingGroup) showsTimeline.appendChild(upcomingGroup);
+    if (completedGroup) showsTimeline.appendChild(completedGroup);
+}
+
 /* Reveal progressivo; sem IntersectionObserver, o conteúdo continua visível. */
-const revealElements = document.querySelectorAll(".member, .show, .gallery-item, .press-card, section");
+const revealElements = document.querySelectorAll(".member, .gallery-item, .press-card, section");
 if (revealElements.length && "IntersectionObserver" in window) {
     const revealObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -493,25 +524,4 @@ downloadModalList.addEventListener('click', delegateViewClick);
             if (caption) caption.textContent = 'Reprodução do vídeo';
         }, { once: true });
     });
-
-    // Atualiza a situação dos shows automaticamente conforme a data local.
-    document.querySelectorAll('.show[data-date]').forEach(show => {
-        const parts = (show.dataset.date || '').split('-').map(Number);
-        if (parts.length !== 3 || parts.some(Number.isNaN)) return;
-
-        const eventDate = new Date(parts[0], parts[1] - 1, parts[2]);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        eventDate.setHours(0, 0, 0, 0);
-
-        const upcoming = eventDate >= today;
-        const status = show.querySelector('.show-status');
-        if (!status) return;
-
-        show.classList.toggle('is-upcoming', upcoming);
-        show.classList.toggle('is-past', !upcoming);
-        status.textContent = upcoming ? 'PRÓXIMO SHOW' : 'JÁ REALIZADO';
-        status.setAttribute('aria-label', upcoming ? 'Próximo show' : 'Show já realizado');
-    });
-
 })();

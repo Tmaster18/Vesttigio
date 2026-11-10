@@ -3498,83 +3498,53 @@ body.menu-open {
 }
 
 
-/* Identificação automática de shows futuros e já realizados */
-.show-status {
-    justify-self: end;
-    align-self: center;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 138px;
-    padding: 9px 13px;
-    border: 1px solid rgba(255,255,255,.18);
-    border-radius: 4px;
-    color: #bdbdbd;
-    background: rgba(255,255,255,.06);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-align: center;
-    white-space: nowrap;
+/* Agenda: hierarquia clara entre próximos shows e eventos já realizados. */
+#shows .timeline { display:flex; flex-direction:column; gap:28px; }
+#shows .shows-group { display:flex; flex-direction:column; gap:14px; }
+#shows .shows-group-title {
+    margin:0 0 4px; padding:0 0 10px; color:#f2f2f2;
+    font-family:'Montserrat',sans-serif; font-size:13px; font-weight:700;
+    letter-spacing:2px; border-bottom:1px solid rgba(255,255,255,.12);
 }
-.show.is-past {
-    opacity: .68;
-    border-left-color: #666;
-}
-.show.is-past .date { color: #888; }
-.show.is-upcoming {
-    border-left-color: var(--blue);
-    box-shadow: 0 0 0 1px rgba(0,153,255,.12);
-}
-.show.is-upcoming .show-status {
-    color: #fff;
-    border-color: var(--blue);
-    background: rgba(0,153,255,.16);
-}
-@media (max-width: 700px) {
-    .show-status {
-        grid-column: 1 / -1;
-        justify-self: start;
-        margin-top: 8px;
-    }
-}
-
-
-/* Hierarquia da agenda: próximos shows em destaque e realizados compactos */
-#shows .timeline { display:flex; flex-direction:column; gap:14px; }
+#shows #upcoming-shows .shows-group-title { color:var(--blue); }
 #shows .show.is-upcoming {
-    display:grid; grid-template-columns:82px minmax(0,1fr) auto;
-    align-items:center; gap:22px; padding:22px 24px; min-height:112px;
-    opacity:1; border:1px solid rgba(0,153,255,.55);
-    border-left:4px solid var(--blue);
-    background:linear-gradient(100deg,rgba(0,153,255,.15),rgba(0,153,255,.035));
-    box-shadow:0 8px 24px rgba(0,0,0,.18),0 0 18px rgba(0,153,255,.1);
+    grid-template-columns:112px minmax(0,1fr) 180px;
+    min-height:112px; padding:24px 26px; opacity:1;
+    border:1px solid rgba(0,183,255,.48); border-left:5px solid var(--blue);
+    background:linear-gradient(100deg,rgba(0,183,255,.14),rgba(21,21,21,.98) 62%);
+    box-shadow:0 8px 24px rgba(0,0,0,.2),0 0 18px rgba(0,183,255,.07);
 }
-#shows .show.is-upcoming .date span { font-size:2.2em; font-weight:800; color:#fff; }
-#shows .show.is-upcoming .info h3 { color:#fff; font-size:1.15em; }
-#shows .show.is-upcoming .show-status {
-    min-width:138px; padding:11px 15px; color:#fff;
-    border-color:var(--blue); background:rgba(0,153,255,.22); font-size:11px;
+#shows .show.is-upcoming .date span { color:#fff; font-size:2.15em; font-weight:800; }
+#shows .show.is-upcoming .info h3 { color:#fff; }
+#shows .show-status {
+    justify-self:end; display:inline-flex; align-items:center; justify-content:center;
+    min-width:142px; padding:9px 12px; border:1px solid rgba(0,183,255,.55);
+    border-radius:4px; color:#fff; background:rgba(0,183,255,.16);
+    font-family:'Montserrat',sans-serif; font-size:9px; font-weight:700;
+    letter-spacing:1px; text-align:center; white-space:nowrap;
 }
 #shows .show.is-past {
-    display:grid; grid-template-columns:48px minmax(0,1fr) auto;
-    align-items:center; gap:12px; min-height:0; padding:8px 14px;
-    opacity:.46; border:1px solid rgba(255,255,255,.07);
-    border-left:2px solid #555; background:rgba(255,255,255,.018);
-    box-shadow:none;
+    grid-template-columns:72px minmax(0,1fr) 140px;
+    min-height:0; padding:10px 16px; opacity:.48;
+    border:1px solid rgba(255,255,255,.07); border-left:3px solid #555;
+    border-radius:5px; background:rgba(255,255,255,.018); box-shadow:none;
 }
-#shows .show.is-past .date span { font-size:1.12em; font-weight:600; }
-#shows .show.is-past .date small { font-size:.68em; }
-#shows .show.is-past .info h3 { font-size:.86em; color:#aaa; margin:0; }
-#shows .show.is-past .info p { font-size:.74em; margin:2px 0 0; color:#777; }
+#shows .show.is-past:hover { transform:none; background:rgba(255,255,255,.04); }
+#shows .show.is-past .date { font-size:28px; color:#888; }
+#shows .show.is-past .date span { font-size:1.15em; }
+#shows .show.is-past .date small { font-size:10px; }
+#shows .show.is-past .info h3 { margin:0; color:#aaa; font-size:16px; }
+#shows .show.is-past .info p { margin:3px 0 0; color:#777; font-size:12px; }
 #shows .show.is-past .show-status {
-    min-width:0; padding:5px 8px; font-size:8px; color:#999;
-    border-color:rgba(255,255,255,.1); background:transparent;
+    min-width:0; padding:5px 7px; color:#999;
+    border-color:rgba(255,255,255,.12); background:transparent; font-size:8px;
 }
-@media (max-width:700px) {
-    #shows .show.is-upcoming { grid-template-columns:58px minmax(0,1fr); gap:12px; padding:16px; }
+@media (max-width:768px) {
+    #shows .show.is-upcoming { grid-template-columns:76px minmax(0,1fr); gap:12px; padding:17px 14px; }
     #shows .show.is-upcoming .show-status { grid-column:1/-1; justify-self:start; margin-top:2px; }
-    #shows .show.is-past { grid-template-columns:38px minmax(0,1fr); gap:9px; padding:8px 10px; }
+    #shows .show.is-past { grid-template-columns:48px minmax(0,1fr); gap:10px; padding:9px 11px; }
     #shows .show.is-past .show-status { grid-column:2; justify-self:start; margin-top:2px; }
+}
+@media (prefers-reduced-motion:reduce) {
+    #shows .show, #shows .show:hover { transition:none !important; transform:none !important; }
 }
