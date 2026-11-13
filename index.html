@@ -374,38 +374,22 @@
 </button>
 
 <div id="particles"></div>
+ iframe.contentWindow.postMessage(
+                    JSON.stringify({
+                        event: "command",
+                        func: "pauseVideo",
+                        args: []
+                    }),
+                    "*"
+                );
 
-<script defer src="script.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    document.querySelectorAll(".video-preview").forEach(botao => {
-
-        botao.addEventListener("click", function () {
-
-            const videoAtual = this.closest(".video-card");
-
-            document.querySelectorAll(".video-card iframe").forEach(iframe => {
-
-                if (!videoAtual.contains(iframe)) {
-
-                    // Pausa o vídeo sem remover o player
-                    if (iframe.src.includes("youtube.com")) {
-                        iframe.contentWindow.postMessage(
-                            '{"event":"command","func":"pauseVideo","args":""}',
-                            "*"
-                        );
-                    }
-                }
-
-            });
+            }
 
         });
 
-    });
+    }, true);
 
-});
+})();
 </script>
 
 </body>
