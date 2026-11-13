@@ -255,15 +255,7 @@
     </button>
     <p class="video-caption">Vesttigio Classic Rock — apresentação ao vivo</p>
 </div>
-        
-        <div class="video-card" data-video-id="4fak46Nyy2A">
-            <button class="video-preview" type="button" aria-label="Reproduzir vídeo 1 da Vesttigio">
-                <img src="https://img.youtube.com/vi/4fak46Nyy2A/hqdefault.jpg" alt="Miniatura do vídeo 1 da banda Vesttigio" loading="lazy" decoding="async">
-                <span class="video-play" aria-hidden="true"><i class="fas fa-play"></i></span>
-            </button>
-            <p class="video-caption">Vesttigio Classic Rock — apresentação ao vivo</p>
-        </div>
-
+     
         <div class="video-card" data-video-id="rljy5CAB14Q">
             <button class="video-preview" type="button" aria-label="Reproduzir vídeo 2 da Vesttigio">
                 <img src="https://img.youtube.com/vi/rljy5CAB14Q/hqdefault.jpg" alt="Miniatura do vídeo 2 da banda Vesttigio" loading="lazy" decoding="async">
@@ -384,6 +376,45 @@
 <div id="particles"></div>
 
 <script defer src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const videoCards = document.querySelectorAll(".video-card");
+
+    videoCards.forEach(card => {
+
+        const button = card.querySelector(".video-preview");
+
+        if (!button) return;
+
+        button.addEventListener("click", function () {
+
+            // Para todos os outros players
+            videoCards.forEach(otherCard => {
+
+                if (otherCard === card) return;
+
+                const iframe = otherCard.querySelector("iframe");
+
+                if (iframe) {
+                    iframe.src = "";
+                    iframe.remove();
+                }
+
+                const preview = otherCard.querySelector(".video-preview");
+
+                if (preview) {
+                    preview.style.display = "";
+                }
+            });
+
+        });
+
+    });
+
+});
+</script>
 
 </body>
 </html>
