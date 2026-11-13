@@ -380,33 +380,25 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    const videoCards = document.querySelectorAll(".video-card");
+    document.querySelectorAll(".video-preview").forEach(botao => {
 
-    videoCards.forEach(card => {
+        botao.addEventListener("click", function () {
 
-        const button = card.querySelector(".video-preview");
+            const videoAtual = this.closest(".video-card");
 
-        if (!button) return;
+            document.querySelectorAll(".video-card iframe").forEach(iframe => {
 
-        button.addEventListener("click", function () {
+                if (!videoAtual.contains(iframe)) {
 
-            // Para todos os outros players
-            videoCards.forEach(otherCard => {
-
-                if (otherCard === card) return;
-
-                const iframe = otherCard.querySelector("iframe");
-
-                if (iframe) {
-                    iframe.src = "";
-                    iframe.remove();
+                    // Pausa o vídeo sem remover o player
+                    if (iframe.src.includes("youtube.com")) {
+                        iframe.contentWindow.postMessage(
+                            '{"event":"command","func":"pauseVideo","args":""}',
+                            "*"
+                        );
+                    }
                 }
 
-                const preview = otherCard.querySelector(".video-preview");
-
-                if (preview) {
-                    preview.style.display = "";
-                }
             });
 
         });
