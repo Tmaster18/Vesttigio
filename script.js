@@ -507,21 +507,84 @@ downloadModalList.addEventListener('click', delegateViewClick);
         });
     }
 
-    document.querySelectorAll('.video-card[data-video-id]').forEach(card => {
+    
+    /* ==========================================================
+       VIDEOS — CONTROLE DE PLAYER ÚNICO
+       Pausa o vídeo anterior antes de iniciar outro.
+    ========================================================== */
+
+    const videoCards = document.querySelectorAll(
+        '.video-card[data-video-id]'
+    );
+
+    // Pausa todos os players que já foram carregados.
+    const pauseOtherVideos = (activeIframe = null) => {
+
+        document.querySelectorAll('.video-card iframe').forEach(iframe => {
+
+            if (iframe === activeIframe) return;
+
+            if (!iframe.contentWindow) return;
+
+            iframe.contentWindow.postMessage(
+                JSON.stringify({
+                    event: 'command',
+                    func: 'pauseVideo',
+                    args: []
+                }),
+                'https://www.youtube-nocookie.com'
+            );
+
+        });
+    };
+
+    videoCards.forEach(card => {
+
         const playButton = card.querySelector('.video-preview');
+
         if (!playButton) return;
+
         playButton.addEventListener('click', () => {
+
             const videoId = card.dataset.videoId;
+
             if (!/^[\w-]{11}$/.test(videoId || '')) return;
+
+            // Primeiro pausa qualquer outro vídeo em reprodução.
+            pauseOtherVideos();
+
+            // Cria o novo player.
             const iframe = document.createElement('iframe');
-            iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+
+            const params = new URLSearchParams({
+                autoplay: '1',
+                rel: '0',
+                enablejsapi: '1',
+                playsinline: '1',
+                origin: window.location.origin
+            });
+
+            iframe.src =
+                `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
+
             iframe.title = 'Vídeo da banda Vesttigio no YouTube';
-            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+
+            iframe.allow =
+                'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+
             iframe.allowFullscreen = true;
-            iframe.loading = 'lazy';
+            iframe.loading = 'eager';
+
+            // Substitui somente a miniatura clicada.
             playButton.replaceWith(iframe);
+
+            // Atualiza a legenda.
             const caption = card.querySelector('.video-caption');
-            if (caption) caption.textContent = 'Reprodução do vídeo';
-        }, { once: true });
+
+            if (caption) {
+                caption.textContent = 'Reprodução do vídeo';
+            }
+
+        });
+
     });
-})();
