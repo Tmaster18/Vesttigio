@@ -513,16 +513,14 @@ downloadModalList.addEventListener('click', delegateViewClick);
        Pausa o vídeo anterior antes de iniciar outro.
     ========================================================== */
 
-    const videoCards = document.querySelectorAll(
+        const videoCards = document.querySelectorAll(
         '.video-card[data-video-id]'
     );
 
-    // Pausa todos os players que já foram carregados.
-    const pauseOtherVideos = (activeIframe = null) => {
+    // Pausa todos os players já carregados.
+    const pauseOtherVideos = () => {
 
         document.querySelectorAll('.video-card iframe').forEach(iframe => {
-
-            if (iframe === activeIframe) return;
 
             if (!iframe.contentWindow) return;
 
@@ -532,12 +530,15 @@ downloadModalList.addEventListener('click', delegateViewClick);
                     func: 'pauseVideo',
                     args: []
                 }),
-                'https://www.youtube-nocookie.com'
+                '*'
             );
 
         });
+
     };
 
+
+    // Inicializa os botões de reprodução.
     videoCards.forEach(card => {
 
         const playButton = card.querySelector('.video-preview');
@@ -548,9 +549,10 @@ downloadModalList.addEventListener('click', delegateViewClick);
 
             const videoId = card.dataset.videoId;
 
+            // Valida o ID do YouTube.
             if (!/^[\w-]{11}$/.test(videoId || '')) return;
 
-            // Primeiro pausa qualquer outro vídeo em reprodução.
+            // Pausa os vídeos anteriores.
             pauseOtherVideos();
 
             // Cria o novo player.
@@ -570,12 +572,13 @@ downloadModalList.addEventListener('click', delegateViewClick);
             iframe.title = 'Vídeo da banda Vesttigio no YouTube';
 
             iframe.allow =
-                'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+                'autoplay; encrypted-media; picture-in-picture; fullscreen';
 
             iframe.allowFullscreen = true;
+
             iframe.loading = 'eager';
 
-            // Substitui somente a miniatura clicada.
+            // Substitui a miniatura pelo player.
             playButton.replaceWith(iframe);
 
             // Atualiza a legenda.
@@ -585,7 +588,7 @@ downloadModalList.addEventListener('click', delegateViewClick);
                 caption.textContent = 'Reprodução do vídeo';
             }
 
-                });
+        });
 
     });
 
