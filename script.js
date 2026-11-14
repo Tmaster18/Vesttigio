@@ -585,6 +585,8 @@ downloadModalList.addEventListener('click', delegateViewClick);
                 caption.textContent = 'Reprodução do vídeo';
             }
 
-        });
+                });
 
     });
+
+})();
